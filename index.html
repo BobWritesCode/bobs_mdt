@@ -14,7 +14,7 @@
       <div></div>
       <div>
         <h1>LSPD Mobile Database Terminal</h1>
-        <p>Hello Officer Graves</p>
+        <p>Hello <span id="user-rank"></span> <span id="user-name"></span></p>
       </div>
     </div>
   </div>
@@ -52,19 +52,16 @@
           <div>
             <h2>STATUS</h2>
             <div>
-              <p>Duty <button class="float-right">Sign On</button></p>
-              <p style="font-size:small;">You are currently: <span>On-Duty</span></p>
+              <p>Duty <button id="btn-duty" class="float-right">Off</button></p>
             </div>
             <hr>
             <div>
-              <p>Avaliable? <button class="float-right">Yes</button></p>
-              <p style="font-size:small;">You are currently: <span>Unavaliable</span></p>
+              <p>Avaliable? <button id="btn-officer-available" class="float-right">No</button></p>
               <p style="font-size:small;">You will not recieve any alerts.</p>
             </div>
             <hr>
             <div>
-              <p>Call Sign: <input tpye="text"> <button class="float-right">Set</button></p>
-              <p style="font-size:small;">You call-sign is currently: <span>315</span></p>
+              <p>Call Sign: <span id="user-callsign">315</span> <button class="float-right">Set</button></p>
             </div>
           </div>
         </div>
