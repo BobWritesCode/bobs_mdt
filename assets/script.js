@@ -1,6 +1,5 @@
 console.log("connected")
 
-const pdDashboardCont = document.getElementById('pd-dasboard-container');
 const pdIncidentCont = document.getElementById('pd-incident-container');
 const btnPdDashboard = document.getElementById('btnPdDashboard');
 const btnPdIncidents = document.getElementById('btnPdIncidents');
@@ -37,6 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
  * Change MDT to Dashboard screen
  */
  function changeToPdDashboard() {
+  const pdDashboardCont = document.getElementById('pd-dashboard-container');
   pdDashboardCont.style.display = "flex";
   pdIncidentCont.style.display = "none";
  }
@@ -46,6 +46,7 @@ window.addEventListener('DOMContentLoaded', function() {
  * Change MDT to Incident screen
  */
 function changeToPdIncidents() {
+  const pdDashboardCont = document.getElementById('pd-dashboard-container');
   pdDashboardCont.style.display = "none";
   pdIncidentCont.style.display = "flex";
 }
@@ -134,3 +135,32 @@ function toggleOfficerAvailable() {
   const spanUserCallSign = document.getElementById("-");
   spanUserCallSign.textContent = data
 }
+
+
+/**
+ * Add incident to dashboard
+ */
+ function addIncidentToDash(data) {
+  let tenCode = "10-36";
+  let incTitle = "Shots Fired";
+  let incNum = "43247";
+  let incLoc = "The Beach";
+  let incInf = "Seen heading west."
+  var data =    "<div class='mdt-inc'>"
+                +   "<button>R</button>"
+                +   "<p><span class='code10'>" + tenCode + "</span><span>" + incTitle + "</span></p>"
+                +   "<p>Inc: " + incNum + "</p>"
+                +   "<p>Loc: " + incLoc + "</p>"
+                +   "<p>Info: " + incInf + "</p>"
+                + "</div>"
+  const incidentCol = document.getElementById("pd-dashboard-incidents");
+  incidentCol.innerHTML += data;
+}
+
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
