@@ -8,18 +8,6 @@
   <title>Document</title>
 </head>
 <body>
-  
-  <div id="header">
-    <img src="imgs/clipart1855065.png" alt="" id="pd-header-img">
-    <div id="header-bar">
-      <div></div>
-      <div>
-        <h1>LSPD Mobile Database Terminal</h1>
-        <p>Hello <span id="user-rank"></span> <span id="user-name"></span></p>
-      </div>
-    </div>
-  </div>
-
   <!-- Pop up for input-->
   <div id="popup">
     <div>
@@ -31,158 +19,143 @@
   </div>
   <!-- END - Pop up for input-->
 
-  <!-- Navigation bar-->
-  <div id="nav">
-    <button class="button" id="btnPdDashboard">Dashboard</button>
-    <button class="button">Search</button>
-    <button class="button" id="btnPdIncidents">Incidents</button>
-    <button class="button">Warrants</button>
-    <button class="button">Dispatch</button>
-    <button class="button">Manage</button>
-  </div>
-  <!-- END - Navigation bar-->
+  <img src="imgs/clipart1855065.png" alt="" id="pd-header-img">
 
-  <!-- Main body / container-->
-  <div id="main-container">
-    <div id="pd-dashboard-container">
-      <div id="pd-dashboard-col1">
-        <div class="module" style="height:100%;">
-          <div>
-            <h2>INCIDENTS</h2>
-          </div>
-          <div id="pd-dashboard-incidents">
-          
-          </div>
-        </div>
-      </div>
-      <div id="pd-dashboard-col2">
-        <div class="module" style="height:60%;">
-          <div>
-            <h2>BOLOs</h2>
-          </div>
-        </div>
-        <div class="module" style="height:38%;">
-          <div>
-            <h2>MOST WANTED</h2>
-          </div>
-        </div>
-      </div>
-      <div id="pd-dashboard-col3">
-        <div class="module" style="height:100%;">
-          <div>
-            <h2>STATUS</h2>
-            <div>
-              <p>Duty <button id="btn-duty" class="float-right">Off</button></p>
-            </div>
-            <hr>
-            <div>
-              <p>Available? <button id="btn-officer-available" class="float-right">No</button></p>
-              <p style="font-size:small;">You will not receive any alerts.</p>
-            </div>
-            <hr>
-            <div>
-              <p>Call Sign: <span id="user-call-sign">315</span> <button id="btn-call-sign" class="float-right">Set</button></p>
-            </div>
-          </div>
+  <div id="mdt-container">
+
+    <div id="header">
+      <div>
+        <div>
+          <h1>LSPD Mobile Database Terminal</h1>
+          <p>Hello <span id="user-rank"></span> <span id="user-name"></span></p>
         </div>
       </div>
     </div>
 
-    <div id="pd-incident-container">
-      <div id="col1">
-        <div class="module" style="height:100%;">
-          <div>
-            <h2>INCIDENT</h2>
+    <!-- Navigation bar-->
+    <div id="nav">
+      <button class="button" id="btnPdDashboard">Dashboard</button>
+      <button class="button">Search</button>
+      <button class="button" id="btnPdIncidents">Incidents</button>
+      <button class="button">Warrants</button>
+      <button class="button">Dispatch</button>
+      <button class="button">Manage</button>
+    </div>
+    <!-- END - Navigation bar-->
+
+    <!-- Main body / container-->
+    <div id="main-container">
+      <div id="pd-dashboard-container">
+        <div id="pd-dashboard-col1">
+          <div class="module">
+            <div>
+              <h2>INCIDENTS</h2>
+            </div>
+            <div id="pd-dashboard-incidents">
+            </div>
           </div>
-          <label for="input-inc-title">Inc number:</label>
-          <input type="text" id="input-inc-number" class="inc-input" value="213678">
-          <label for="input-inc-title">Title</label>
-          <input type="text" id="input-inc-title" class="inc-input" value="Bank Robbery">
-          <label for="input-inc-title">Location</label>
-          <input type="text" id="input-inc-location" class="inc-input" value="West Coast Highway">
-          <label for="input-inc-title">Date</label>
-          <input type="text" id="input-inc-date" class="inc-input" value="10th Oct 22">
-          <label for="input-inc-title">Univeral Time</label>
-          <input type="text" id="input-inc-uni-time" class="inc-input" value="6:21 PM">
-          <label for="input-inc-title">Local Time</label>
-          <input type="text" id="input-inc-loc-time" class="inc-input" value="12:24 PPM" >
+        </div>
+
+        <div id="pd-dashboard-col2">
+          
+          <div class="module">
+            <div>
+              <h2>BOLOs</h2>
+            </div>
+            <div id="pd-dashboard-bolos">
+            </div>
+          </div>
+
+          <div class="module">
+            <div>
+              <h2>MOST WANTED</h2>
+            </div>
+            <div id="pd-dashboard-most-wanted">
+            </div>
+          </div>
+
+        </div>
+
+        <div id="pd-dashboard-col3">
+          <div class="module">
+            <div>
+              <h2>STATUS</h2>
+              <div>
+                <p>Duty <button id="btn-duty" class="float-right">Off</button></p>
+              </div>
+              <hr>
+              <div>
+                <p>Available? <button id="btn-officer-available" class="float-right">No</button></p>
+                <p>You will not receive any alerts.</p>
+              </div>
+              <hr>
+              <div>
+                <p>Call Sign: <span id="user-call-sign">315</span> <button id="btn-call-sign" class="float-right">Set</button></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div id="col2">
-        <div class="module" style="height:100%;">
-          <div>
-            <h2>EVENT HISTORY</h2>
-            <div id="pd-inc-event-hist-cont">
-              <div class="event-entry">
-                <p><span>System: </span><span><b>Dispatch Alert</b></span></p>
-                <p><span>UT: 16:21 - LT 12:24</span></p>
-                <p>Sent to all units</p>
+
+      <div id="pd-incident-container">
+        <div id="incident-col1">
+          <div class="module">
+            <div>
+              <h2>INCIDENT</h2>
+            </div>
+            <label for="input-inc-title">Inc number:</label>
+            <input type="text" id="input-inc-number" class="inc-input" value="213678">
+            <label for="input-inc-title">Title</label>
+            <input type="text" id="input-inc-title" class="inc-input" value="Bank Robbery">
+            <label for="input-inc-title">Location</label>
+            <input type="text" id="input-inc-location" class="inc-input" value="West Coast Highway">
+            <label for="input-inc-title">Date</label>
+            <input type="text" id="input-inc-date" class="inc-input" value="10th Oct 22">
+            <label for="input-inc-title">Universal Time</label>
+            <input type="text" id="input-inc-uni-time" class="inc-input" value="6:21 PM">
+            <label for="input-inc-title">Local Time</label>
+            <input type="text" id="input-inc-loc-time" class="inc-input" value="12:24 PPM" >
+          </div>
+        </div>
+        <div id="incident-col2">
+          <div class="module">
+            <div>
+              <h2>EVENT HISTORY</h2>
+              <div id="incident-event-history">
               </div>
-              <div class="event-entry">
-                <p><span>System: </span><span><b>Unit 315 on scene</b></span></p>
-                <p><span>UT: 16:23 - LT 12:48</span></p>
+              <div>
+                <textarea id="txt-add-event"></textarea>
+                <button id="btn-add-event">Add</button>
               </div>
-              <div class="event-entry">
-                <p><span>315: </span><span><b>Observation</b></span></p>
-                <p><span>UT: 16:24 - LT 12:59</span></p>
-                <p>4 masked suspects wearing clown suits inside. 1 unknwon hostake, 1 potential getaway vehicle.</p>
-              </div>
-              <div class="event-entry">
-                <p><span>315: </span><span><b>Negotiation</b></span></p>
-                <p><span>UT: 16:29 - LT 13:21</span></p>
-                <p>Terms of hostage release negotiated. Free passage to vehicle 1, 3 vehicles max, no heli, clean chase</p>
-              </div>
-              <div class="event-entry">
-                <p><span>Dispatch: </span><span><b>Advised</b></span></p>
-                <p><span>UT: 16:31 - LT 13:47</span></p>
-                <p>Chase underway</p>
-              </div>
-              <div class="event-entry">
-                <p><span>Dispatch: </span><span><b>Advised</b></span></p>
-                <p><span>UT: 16:31 - LT 13:47</span></p>
-                <p>Veh1 speeds over 100mph</p>
-              </div>
-              <div class="event-entry">
-                <p><span>Dispatch: </span><span><b>Advised</b></span></p>
-                <p><span class="float-right">UT: 16:31 - LT 13:47</span></p>
-                <p>Veh1 has crashed</p>
-              </div>
-              <div class="event-entry">
-                <p><span>Dispatch: </span><span><b>Advised</b></span></p>
-                <p><span>UT: 16:31 - LT 13:47</span></p>
-                <p>2 Suspects in custody and on route to MRPD</p>
-              </div>
+            </div>
+          </div>
+        </div>
+        <div id="incident-col3">
+          <div class="module">
+            <div>
+              <h2>STUFF</h2>
             </div>
             <div>
-              <textarea id="txt-add-event"> </textarea>
-              <button id="btn-add-event">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="col3">
-        <div class="module" style="height:100%;">
-          <div>
-            <h2>STUFF</h2>
-          </div>
-          <div>
-            Suspects <button class="btn-add float-right">+</button>
-            <div class="inc-small-container">
-            </div>
-          </div>
-          <div>
-            Vehicles <button class="btn-add float-right">+</button>
-            <div class="inc-small-container">
-            </div>
-          </div>
-          <div>
-            Witnesses <button class="btn-add float-right">+</button>
-            <div class="inc-small-container">
-            </div>
-          </div>
-          <div>
-            Evidence <button class="btn-add float-right">+</button>
-            <div class="inc-small-container">
+              <div>
+                Suspects <button class="btn-add float-right">+</button>
+                <div class="inc-small-container">
+                </div>
+              </div>
+              <div>
+                Vehicles <button class="btn-add float-right">+</button>
+                <div class="inc-small-container">
+                </div>
+              </div>
+              <div>
+                Witnesses <button class="btn-add float-right">+</button>
+                <div class="inc-small-container">
+                </div>
+              </div>
+              <div>
+                Evidence <button class="btn-add float-right">+</button>
+                <div class="inc-small-container">
+                </div>
+              </div>
             </div>
           </div>
         </div>

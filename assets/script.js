@@ -157,6 +157,86 @@ function toggleOfficerAvailable() {
   incidentCol.innerHTML += data;
 }
 
+/**
+ * Add BOLO to dashboard
+ */
+ function addBoloToDash(data) {
+  let tenCode = "10-36";
+  let incTitle = "Shots Fired";
+  let incNum = "43247";
+  let incLoc = "The Beach";
+  let incInf = "Seen heading west."
+  var data =    "<div class='mdt-inc'>"
+                +   "<button>R</button>"
+                +   "<button>P</button>"
+                +   "<p><span>" + incTitle + "</span></p>"
+                +   "<p>Inc: " + incNum + "</p>"
+                +   "<p>Loc: " + incLoc + "</p>"
+                +   "<p>Info: " + incInf + "</p>"
+                + "</div>"
+  const incidentCol = document.getElementById("pd-dashboard-bolos");
+  incidentCol.innerHTML += data;
+}
+
+/**
+ * Add Most Wanted to dashboard
+ */
+ function addMostWantedToDash(data) {
+  let tenCode = "10-36";
+  let incTitle = "Shots Fired";
+  let incNum = "43247";
+  let incLoc = "The Beach";
+  let incInf = "Seen heading west."
+  var data =    "<div class='mdt-inc'>"
+                +   "<button>R</button>"
+                +   "<button>P</button>"
+                +   "<p><span>" + incTitle + "</span></p>"
+                +   "<p>Inc: " + incNum + "</p>"
+                +   "<p>Loc: " + incLoc + "</p>"
+                +   "<p>Info: " + incInf + "</p>"
+                + "</div>"
+  const incidentCol = document.getElementById("pd-dashboard-most-wanted");
+  incidentCol.innerHTML += data;
+}
+
+/**
+ * Add Most Wanted to dashboard
+ */
+ function addMostEventToEvent(data) {
+  let incTitle = "Shots Fired";
+  let incLoc = "The Beach";
+  let incInf = "Seen heading west."
+  var data =    "<div class='event-entry'>"
+                +   "<p><span>" + incTitle + "</span></p>"
+                +   "<p>Loc: " + incLoc + "</p>"
+                +   "<p>Info: " + incInf + "</p>"
+                + "</div>"
+  const incidentCol = document.getElementById("incident-event-history");
+  incidentCol.innerHTML += data;
+}
+
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+addMostEventToEvent();
+
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+addBoloToDash();
+
 addIncidentToDash();
 addIncidentToDash();
 addIncidentToDash();
@@ -164,3 +244,13 @@ addIncidentToDash();
 addIncidentToDash();
 addIncidentToDash();
 addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+addIncidentToDash();
+
+addMostWantedToDash();
+addMostWantedToDash();
+addMostWantedToDash();
+addMostWantedToDash();
