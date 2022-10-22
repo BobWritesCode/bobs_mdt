@@ -18,6 +18,19 @@
       </div>
     </div>
   </div>
+
+  <!-- Pop up for input-->
+  <div id="popup">
+    <div>
+      <h2>h2</h2>
+      <label for="popup-input1">Label 1: </label>
+      <input id="popup-input1" type="text" value="">
+      <button id="popup-btn-submit">Submit</button>
+    </div>
+  </div>
+  <!-- END - Pop up for input-->
+
+  <!-- Navigation bar-->
   <div id="nav">
     <button class="button" id="btnPdDashboard">Dashboard</button>
     <button class="button">Search</button>
@@ -26,6 +39,9 @@
     <button class="button">Dispatch</button>
     <button class="button">Manage</button>
   </div>
+  <!-- END - Navigation bar-->
+
+  <!-- Main body / container-->
   <div id="main-container">
     <div id="pd-dasboard-container">
       <div id="col1">
@@ -56,17 +72,18 @@
             </div>
             <hr>
             <div>
-              <p>Avaliable? <button id="btn-officer-available" class="float-right">No</button></p>
-              <p style="font-size:small;">You will not recieve any alerts.</p>
+              <p>Available? <button id="btn-officer-available" class="float-right">No</button></p>
+              <p style="font-size:small;">You will not receive any alerts.</p>
             </div>
             <hr>
             <div>
-              <p>Call Sign: <span id="user-callsign">315</span> <button class="float-right">Set</button></p>
+              <p>Call Sign: <span id="user-call-sign">315</span> <button id="btn-call-sign" class="float-right">Set</button></p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div id="pd-incident-container">
       <div id="col1">
         <div class="module" style="height:100%;">
@@ -168,6 +185,6 @@
       </div>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script src="./assets/script.js"></script>
 </body>
 </html>
