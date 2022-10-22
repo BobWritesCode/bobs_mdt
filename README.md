@@ -1,1 +1,8 @@
-# bobs_mdt
+# Bob's MDT
+
+## Features
+
+### To implement
+ EVERYTHING
+### Done
+ Nothing
