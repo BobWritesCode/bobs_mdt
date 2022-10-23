@@ -94,9 +94,10 @@ h1 {
 }
 
 #pd-dashboard-container,
-#pd-search-container,
+#pd-search-person-container,
 #pd-incident-container,
-#pd-person-container {
+#pd-person-container,
+#pd-search-incident-container {
   display: none;
   height: 600px;
 }
@@ -130,7 +131,6 @@ h1 {
   flex-direction: column;
   border:2px solid blue;
   color:#fafafa;
-
 }
 
 #pd-dashboard-col2 .module {
@@ -283,14 +283,14 @@ h1 {
   background-color: rgba(69, 235, 3, 0.3);
 }
 
-#pd-search-container input {
+#pd-search-person-container input {
   width: 30%;
   align-self: center;
   font-size: 23px;
   padding: 5px 10px;
 }
 
-#pd-search-container #pd-search-button {
+#pd-search-person-button {
   margin-top: 10px;
   align-self: center;
   background-color: #e4d100;
@@ -299,7 +299,7 @@ h1 {
   height: 40px
 }
 
-#pd-person-container,
+
 #search-results,
 #person-convictions-tbl,
 #person-incidents-tbl,
@@ -320,10 +320,8 @@ h1 {
   width: 20%;
 }
 
-#search-results th:nth-of-type(odd),
-#person-convictions-tbl th:nth-of-type(odd),
-#person-incidents-tbl th:nth-of-type(odd),
-#person-vehicles-tbl th:nth-of-type(odd) {
+th:nth-of-type(odd),
+td:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -332,7 +330,7 @@ h1 {
 }
 
 #person-identification-tbl td {
-  width: 20px;
+  width: 175px;
 }
 
 #pd-person-container img {
@@ -342,4 +340,8 @@ h1 {
   position: absolute;
   right: 10px;
   top: 60px;
+}
+
+#pd-person-container #person-convictions {
+  margin-top: 30px;
 }
