@@ -95,7 +95,8 @@ h1 {
 
 #pd-dashboard-container,
 #pd-search-container,
-#pd-incident-container {
+#pd-incident-container,
+#pd-person-container {
   display: none;
   height: 600px;
 }
@@ -229,22 +230,15 @@ h1 {
   max-height: 450px;
 }
 
-#pd-dashboard-incidents,
-#pd-dashboard-bolos,
-#pd-dashboard-most-wanted,
-#incident-event-history,
-#incident-col3 .module > div:nth-child(2) {
+
+.module > div:nth-of-type(2) {
   overflow-y: scroll;
   height: auto;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;
 }
 
-#pd-dashboard-incidents::-webkit-scrollbar,
-#pd-dashboard-bolos::-webkit-scrollbar,
-#pd-dashboard-most-wanted::-webkit-scrollbar,
-#incident-event-history::-webkit-scrollbar,
-#incident-col3 .module  > div:nth-child(2)::-webkit-scrollbar {
+.module > div:nth-of-type(2)::-webkit-scrollbar {
   display: none;
 }
 
@@ -305,6 +299,7 @@ h1 {
   height: 40px
 }
 
+#pd-person-container,
 #search-results,
 #person-convictions-tbl,
 #person-incidents-tbl,
