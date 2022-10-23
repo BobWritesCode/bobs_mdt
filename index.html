@@ -36,7 +36,7 @@
     <!-- Navigation bar-->
     <div id="nav">
       <button class="button" id="btnPdDashboard">Dashboard</button>
-      <button class="button" id="btnPdSearch">Search</button>
+      <button class="button" id="btnPdSearch">Person</button>
       <button class="button" id="btnPdIncidents">Incidents</button>
       <button class="button" id="btnPdWarrants">Warrants</button>
       <button class="button" id="btnDispatch">Dispatch</button>
@@ -100,11 +100,11 @@
         </div>
       </div>
 
-      <!-- PD Search container-->
-      <div id="pd-search-container">
+      <!-- PD Person Search container-->
+      <div id="pd-search-person-container">
         <div class="module">
           <div>
-            <h2>Search</h2>
+            <h2>Search - Person</h2>
           </div>
           <div>
             <p>Type in string you wish to search:</p>
@@ -126,10 +126,6 @@
                 <td><input id="pd-search-address" type="text" value=""></td>
               </tr>
               <tr>
-                <td><label for="pd-search-vReg">V Reg:</label></td>
-                <td><input id="pd-search-vReg" type="text" value=""></td>
-              </tr>
-              <tr>
                 <td><label for="pd-search-fPrint">Fingerprint: </label></td>
                 <td><input id="pd-search-fPrint" type="text" value=""></td>
               </tr>
@@ -138,7 +134,7 @@
                 <td><input id="pd-search-dna" type="text" value=""></td>
               </tr>
             </table>
-            <button id="pd-search-button">Search</button>
+            <button id="pd-search-person-button">Search</button>
             <!-- PD Search list-->
             <div>
               <table id="search-results">
@@ -156,6 +152,7 @@
             <h2>Person</h2>
           </div>
           <div>
+            <img src="" alt="Mug shot">
             <h3 id="person-name">Freddy Johnson</h3>
             <h4 id="person-dob">01/01/1990</h4>
             <h4 id="person-address">123 Mall Street</h4>
@@ -174,8 +171,6 @@
                 <td><span id="person-flags">none</div></td>
               </tr>
             </table>
-
-            <img src="" alt="Mug shot">
 
             <div id="person-convictions">
               Convictions
@@ -211,6 +206,34 @@
                   <th>Flags</th>
                   <th>Go to</th>
                 </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PD Incident Search container-->
+      <div id="pd-search-incident-container">
+        <div class="module">
+          <div>
+            <h2>Search - Incident</h2>
+          </div>
+          <div>
+            <p>Type in string you wish to search:</p>
+            <table>
+              <tr>
+                <td><label for="pd-search-incident-number">Incident:</label></td>
+                <td><input id="pd-search-incident-number" type="text" value=""></td>
+              </tr>
+              <tr>
+                <td><label for="pd-search-incident-type">Title:</label></td>
+                <td><input id="pd-search-incident-type" type="text" value=""></td>
+              </tr>
+            </table>
+            <button id="pd-search-person-button">Search</button>
+            <!-- PD Search list-->
+            <div>
+              <table id="search-results">
               </table>
             </div>
           </div>
