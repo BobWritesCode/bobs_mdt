@@ -1,55 +1,60 @@
 console.log("connected")
 
-const pdIncidentCont = document.getElementById('pd-incident-container');
-const btnPdDashboard = document.getElementById('btnPdDashboard');
-const btnPdIncidents = document.getElementById('btnPdIncidents');
-const btnDuty = document.getElementById('btn-duty');
-const btnCallSign = document.getElementById('btn-call-sign');
-const btnPopupSubmit = document.getElementById('popup-btn-submit');
-const btnOfficerAvailable = document.getElementById('btn-officer-available');
-const btnAddEvent = document.getElementById('btn-add-event');
+const doc = document;
+const pdIncidentCont = doc.getElementById('pd-incident-container');
+const btnPdDashboard = doc.getElementById('btnPdDashboard');
+const btnPdSearch = doc.getElementById('btnPdSearch');
+const btnPdIncidents = doc.getElementById('btnPdIncidents');
+const btnDuty = doc.getElementById('btn-duty');
+const btnCallSign = doc.getElementById('btn-call-sign');
+const btnPopupSubmit = doc.getElementById('popup-btn-submit');
+const btnOfficerAvailable = doc.getElementById('btn-officer-available');
+const btnAddEvent = doc.getElementById('btn-add-event');
 
 window.addEventListener('DOMContentLoaded', function() {
   assignUser()
 
-  btnPdDashboard.addEventListener("click", function() {
-    changeToPdDashboard();
-  });
+	btnPdDashboard.addEventListener("click", function() {
+		changeMdtScreen.makeChange('pd-dashboard-container');
+	});
 
-  btnPdIncidents.addEventListener("click", function() {
-    changeToPdIncidents();
-  });
+	btnPdSearch.addEventListener("click", function() {
+		changeMdtScreen.makeChange('pd-search-container');
+	});
+	
+	btnPdIncidents.addEventListener("click", function() {
+		changeMdtScreen.makeChange('pd-incident-container');
+	});
 
   btnDuty.addEventListener("click", toggleDuty);
 
   btnCallSign.addEventListener("click", function() {
     funcPopup("Call Sign");
   });
+
   btnPopupSubmit.addEventListener("click", function() {
     funcPopup.popupSubmit();
-});
-  btnOfficerAvailable.addEventListener("click", toggleOfficerAvailable);
-  btnAddEvent.addEventListener("click", addEventToEventHistory);
-});
+	});
 
+  btnOfficerAvailable.addEventListener("click", toggleOfficerAvailable);
+
+  btnAddEvent.addEventListener("click", addEventToEventHistory);
+
+});
 
 /**
- * Change MDT to Dashboard screen
- */
- function changeToPdDashboard() {
-  const pdDashboardCont = document.getElementById('pd-dashboard-container');
-  pdDashboardCont.style.display = "flex";
-  pdIncidentCont.style.display = "none";
- }
-
-
- /**
- * Change MDT to Incident screen
- */
-function changeToPdIncidents() {
-  const pdDashboardCont = document.getElementById('pd-dashboard-container');
-  pdDashboardCont.style.display = "none";
-  pdIncidentCont.style.display = "flex";
+* Change MDT to screen screen
+*/
+function changeMdtScreen() {
+	var changeFrom = 'pd-dashboard-container';
+	function makeChange(data) {
+		var changeToDoc = doc.getElementById(data);
+		var changeFromDoc = doc.getElementById(changeFrom);
+		changeFromDoc.style.display = "none";
+		changeToDoc.style.display = "flex";
+		changeFrom = data;
+	}
+	changeMdtScreen.makeChange = makeChange;
 }
 
 
@@ -85,9 +90,9 @@ function toggleOfficerAvailable() {
  * Assign user
  */
  function assignUser() {
-  const spanUserName = document.getElementById("user-name");
-  const spanUserRank = document.getElementById("user-rank");
-  const spanUserCallSign = document.getElementById("user-call-sign");
+  const spanUserName = doc.getElementById("user-name");
+  const spanUserRank = doc.getElementById("user-rank");
+  const spanUserCallSign = doc.getElementById("user-call-sign");
   spanUserName.textContent = "Graves"
   spanUserRank.textContent = "Captain"
   spanUserCallSign.textContent = "315"
@@ -98,21 +103,21 @@ function toggleOfficerAvailable() {
  * Open / Close popup
  */
  function funcPopup(r_reason) {
-  const popup = document.getElementById("popup");
+  const popup = doc.getElementById("popup");
   var reason = r_reason
-  
+
   h2 = popup.getElementsByTagName("h2");
   h2[0].innerHTML = reason;
-  
+
   if (popup.style.display != "block") {
 
     popup.style.display = "block";
   }
 
   function popupSubmit() {
-    const popup = document.getElementById("popup");
+    const popup = doc.getElementById("popup");
     popup.style.display = "none";
-    let input1 = document.getElementById("popup-input1");
+    let input1 = doc.getElementById("popup-input1");
     var data = input1.value;
     popup.style.display = "none";
 
@@ -133,7 +138,7 @@ function toggleOfficerAvailable() {
  * Change call sign
  */
  function changeCallSign(data) {
-  const spanUserCallSign = document.getElementById("-");
+  const spanUserCallSign = doc.getElementById("-");
   spanUserCallSign.textContent = data
 }
 
@@ -154,7 +159,7 @@ function toggleOfficerAvailable() {
                 +   "<p>Loc: " + incLoc + "</p>"
                 +   "<p>Info: " + incInf + "</p>"
                 + "</div>"
-  const incidentCol = document.getElementById("pd-dashboard-incidents");
+  const incidentCol = doc.getElementById("pd-dashboard-incidents");
   incidentCol.innerHTML += data;
 }
 
@@ -175,7 +180,7 @@ function toggleOfficerAvailable() {
                 +   "<p>Loc: " + incLoc + "</p>"
                 +   "<p>Info: " + incInf + "</p>"
                 + "</div>"
-  const incidentCol = document.getElementById("pd-dashboard-bolos");
+  const incidentCol = doc.getElementById("pd-dashboard-bolos");
   incidentCol.innerHTML += data;
 }
 
@@ -196,7 +201,7 @@ function toggleOfficerAvailable() {
                 +   "<p>Loc: " + incLoc + "</p>"
                 +   "<p>Info: " + incInf + "</p>"
                 + "</div>"
-  const incidentCol = document.getElementById("pd-dashboard-most-wanted");
+  const incidentCol = doc.getElementById("pd-dashboard-most-wanted");
   incidentCol.innerHTML += data;
 }
 
@@ -204,19 +209,20 @@ function toggleOfficerAvailable() {
  * Add Most Wanted to dashboard
  */
  function addEventToEventHistory(data) {
-  let text = document.getElementById("txt-add-event").value;
+  let text = doc.getElementById("txt-add-event").value;
   let person = "Graves";
   let time = "5:00pm";
+  let date = "23/10/22"
   var data =    "<div class='event-entry'>"
-                +   "<p><strong>" + person + "</strong> @ " + time + ".</p>"
+                +   "<p><strong>" + person + "</strong> @ " + time + " on " + date + ".</p>"
                 +   "<p>" + text + "</p>"
                 + "</div>"
-  const incidentCol = document.getElementById("incident-event-history");
+  const incidentCol = doc.getElementById("incident-event-history");
   incidentCol.innerHTML += data;
-  document.getElementById("txt-add-event").value = "";
+  doc.getElementById("txt-add-event").value = "";
 }
 
-
+changeMdtScreen()
 
 addBoloToDash();
 addBoloToDash();
