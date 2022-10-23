@@ -94,12 +94,13 @@ h1 {
 }
 
 #pd-dashboard-container,
+#pd-search-container,
 #pd-incident-container {
   display: none;
   height: 600px;
 }
 
-#pd-incident-container {
+#pd-dashboard-container {
   display: flex;
 }
 
@@ -286,4 +287,36 @@ h1 {
   position: absolute;
   top: 25px;
   background-color: rgba(69, 235, 3, 0.3);
+}
+
+#pd-search-container input {
+  width: 30%;
+  align-self: center;
+  font-size: 23px;
+  padding: 5px 10px;
+}
+
+#pd-search-container #pd-search-button {
+  margin-top: 10px;
+  align-self: center;
+  background-color: #e4d100;
+  color: #333333;
+  width: 50%;
+  height: 40px
+}
+
+#pd-search-container #search-results{
+  margin-top: 10px;
+  align-self: center;
+  width: 80%;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#pd-search-container #search-results th {
+  width: 20%;
+}
+
+#pd-search-container #search-results th:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.2);
 }
