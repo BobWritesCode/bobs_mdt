@@ -7,6 +7,7 @@ const btnDuty = document.getElementById('btn-duty');
 const btnCallSign = document.getElementById('btn-call-sign');
 const btnPopupSubmit = document.getElementById('popup-btn-submit');
 const btnOfficerAvailable = document.getElementById('btn-officer-available');
+const btnAddEvent = document.getElementById('btn-add-event');
 
 window.addEventListener('DOMContentLoaded', function() {
   assignUser()
@@ -27,8 +28,8 @@ window.addEventListener('DOMContentLoaded', function() {
   btnPopupSubmit.addEventListener("click", function() {
     funcPopup.popupSubmit();
 });
-
   btnOfficerAvailable.addEventListener("click", toggleOfficerAvailable);
+  btnAddEvent.addEventListener("click", addEventToEventHistory);
 });
 
 
@@ -202,30 +203,20 @@ function toggleOfficerAvailable() {
 /**
  * Add Most Wanted to dashboard
  */
- function addMostEventToEvent(data) {
-  let incTitle = "Shots Fired";
-  let incLoc = "The Beach";
-  let incInf = "Seen heading west."
+ function addEventToEventHistory(data) {
+  let text = document.getElementById("txt-add-event").value;
+  let person = "Graves";
+  let time = "5:00pm";
   var data =    "<div class='event-entry'>"
-                +   "<p><span>" + incTitle + "</span></p>"
-                +   "<p>Loc: " + incLoc + "</p>"
-                +   "<p>Info: " + incInf + "</p>"
+                +   "<p><strong>" + person + "</strong> @ " + time + ".</p>"
+                +   "<p>" + text + "</p>"
                 + "</div>"
   const incidentCol = document.getElementById("incident-event-history");
   incidentCol.innerHTML += data;
+  document.getElementById("txt-add-event").value = "";
 }
 
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
-addMostEventToEvent();
+
 
 addBoloToDash();
 addBoloToDash();
