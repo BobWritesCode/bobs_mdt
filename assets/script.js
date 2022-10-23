@@ -277,10 +277,18 @@ function performPdSearch() {
 };
 
 const fakePeople = [];
-fakePeople[0] = ['George', 'Bones', '12/01/85', '7 Park Lane'];
-fakePeople[1] = ['Gary', 'Bones', '27/09/88', '6 Park Lane'];
+fakePeople[0] = ['George', 'Bones', '12/01/85', '7 Park Lane', "67dsf"];
+fakePeople[1] = ['Gary', 'Bones', '27/09/88', '6 Park Lane', "80fre"];
 
-changeMdtScreen()
+const fakeCars = [];
+fakeCars[0] = ["67dsf","84DNT74", "Fiat", "Puma"];
+fakeCars[1] = ["67dsf","92HGN22", "Ford", "Mustang"];
+fakeCars[2] = ["67dsf","15IFT63", "Smart", "Pigeon"];
+fakeCars[3] = ["67dsf","26TFC84", "Fiat", "Fox"];
+fakeCars[4] = ["67dsf","21TJD46", "Ford", "Panda"];
+fakeCars[5] = ["67dsf","54TDB48", "Junk", "Lion"];
+
+changeMdtScreen();
 
 addBoloToDash();
 addBoloToDash();

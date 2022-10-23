@@ -305,18 +305,46 @@ h1 {
   height: 40px
 }
 
-#pd-search-container #search-results{
+#search-results,
+#person-convictions-tbl,
+#person-incidents-tbl,
+#person-vehicles-tbl {
   margin-top: 10px;
   align-self: center;
   width: 80%;
   border: 1px solid white;
   background-color: rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
-#pd-search-container #search-results th {
+#search-results th,
+#person-convictions-tbl th,
+#person-incidents-tbl th,
+#person-vehicles-tbl th {
   width: 20%;
 }
 
-#pd-search-container #search-results th:nth-of-type(odd) {
+#search-results th:nth-of-type(odd),
+#person-convictions-tbl th:nth-of-type(odd),
+#person-incidents-tbl th:nth-of-type(odd),
+#person-vehicles-tbl th:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+#pd-person-container {
+  position: relative;
+}
+
+#person-identification-tbl td {
+  width: 20px;
+}
+
+#pd-person-container img {
+  border: 1px solid white;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: 10px;
+  top: 60px;
 }
