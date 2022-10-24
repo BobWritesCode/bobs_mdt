@@ -11,6 +11,7 @@ const btnPopupSubmit = doc.getElementById('popup-btn-submit');
 const btnOfficerAvailable = doc.getElementById('btn-officer-available');
 const btnAddEvent = doc.getElementById('btn-add-event');
 const btnPerformPDSearch = doc.getElementById('pd-search-person-button');
+const btnPerformPDIncident = doc.getElementById('pd-search-incident-button');
 
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -39,6 +40,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	// PD search function calls
 	btnPerformPDSearch.addEventListener("click", performPdSearch);
+	btnPerformPDIncident.addEventListener("click", performPdIncidentSearch);
 
 	// PD incidents function calls
   btnAddEvent.addEventListener("click", addEventToEventHistory);
@@ -272,8 +274,8 @@ function performPdSearch() {
       cell1.innerHTML = tableData[i][0] + " " + tableData[i][1];
       cell2.innerHTML = tableData[i][2];
       cell3.innerHTML = tableData[i][3];
-      cell4.innerHTML = "<button id='" + tableData[i][4] + "' data-id='"+ tableData[i][4] +"' class='btn-goto-person' value>\>\>\></button>";
-      cell5.innerHTML = "";
+			cell4.innerHTML = "";
+      cell5.innerHTML = "<button id='" + tableData[i][4] + "' data-id='"+ tableData[i][4] +"' class='btn-goto-person' value>\>\>\></button>";
 		};
 	};
   // Create button function.
@@ -284,9 +286,80 @@ function performPdSearch() {
       openPerson(tableData[i][4]);
     });
   }
-
 };
 
+
+/**
+ * Perform Incident search on the PD MDT Search screen
+ */
+ function performPdIncidentSearch() {
+  var user = [];
+	user[0] = doc.getElementById('pd-search-incident-number').value;
+	user[1] = doc.getElementById('pd-search-incident-type').value;
+	console.log(user)
+	// Set up table header
+	const searchResults = doc.getElementById("search-incident-results");
+	searchResults.innerHTML =	"<tr>"
+														+ "<th>Incident number:</th>"
+														+ "<th>Type</th>"
+														+ "<th>Flags</th>"
+														+ "<th>Goto</th>"
+														+ "</tr>"; 
+
+	// Search each row 1 by 1
+	tableData = fakeIncidents;
+	console.log(tableData.length);
+
+	for (let i=0; i<tableData.length; i++) {
+
+		var addToList = false;
+		
+		var j=0;
+		for (const [key, value] of Object.entries(tableData[i])) {
+
+			if (user[j] != "") { 
+
+				var a = user[j].toLowerCase();
+				var b = value.toLowerCase();
+				if (b.includes(a)) {	
+					addToList = true;
+				} else {
+					addToList = false;
+					break;
+				};
+
+			};
+
+			console.log(addToList);
+			j+=1;
+			if (j==2) { break };
+
+		};
+		console.log(addToList);
+		// If potential match add to search results
+		if (addToList) {
+			var row = searchResults.insertRow(-1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			cell1.innerHTML = tableData[i]["incidentNumber"];
+			cell2.innerHTML = tableData[i]["title"];
+			cell3.innerHTML = "";
+			cell4.innerHTML = "<button id='" + tableData[i][0] + "' data-id='"+ tableData[i][0] +"' class='btn-goto-incident' value>\>\>\></button>";
+		};
+
+	};
+
+  // Create button function.
+  const btnPdOpenPerson = document.getElementsByClassName("btn-goto-person");
+  for (let i = 0; i < btnPdOpenPerson.length; i++) {
+    btnPdOpenPerson[i].addEventListener("click", function() {
+      // Character unique ID to assign to button.
+      openPerson(tableData[i][4]);
+    });
+  };
+};
 
 /**
  * Open Person's record on MDT
@@ -374,7 +447,6 @@ function openPerson(data) {
       openVehicle(fakeCars[i][1]);
     });
   };
-
 };
 
 

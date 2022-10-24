@@ -290,6 +290,7 @@ h1 {
   padding: 5px 10px;
 }
 
+#pd-search-incident-button,
 #pd-search-person-button {
   margin-top: 10px;
   align-self: center;
@@ -301,6 +302,7 @@ h1 {
 
 
 #search-results,
+#search-incident-results,
 #person-convictions-tbl,
 #person-incidents-tbl,
 #person-vehicles-tbl {
@@ -314,6 +316,7 @@ h1 {
 }
 
 #search-results th,
+#search-incident-results th,
 #person-convictions-tbl th,
 #person-incidents-tbl th,
 #person-vehicles-tbl th {
