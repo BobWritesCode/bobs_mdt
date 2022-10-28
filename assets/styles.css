@@ -87,6 +87,8 @@ body {
   height: 45px;
 }
 
+/* HTML Elements */
+
 h1 {
   font-size: 20px;
   letter-spacing: 2px;
@@ -293,19 +295,32 @@ h2, h3, h4, h5, h6 {
   background-color: rgba(69, 235, 3, 0.3);
 }
 
-#pd-search-person-container input {
-  width: 30%;
-  align-self: center;
+td:last-of-type {
+  display: flex;
+  width: 100%;
+  margin: 0 5px;
+  justify-content: center;
+}
+
+table button,
+table button {
+  width: 80%;
+}
+
+#pd-search-person-container input,
+#pd-search-incident-container input {
+  width: 20%;
   padding: 5px 10px;
 }
 
-#pd-search-incident-container > div > div:nth-of-type(2) {
+#pd-search-incident-container > div > div:nth-of-type(2),
+#pd-search-person-container > div > div:nth-of-type(2) {
   display: flex;
   flex-direction: column;
-
 }
 
-#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type {
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type,
+#pd-search-person-container > div > div:nth-of-type(2) > div:first-of-type {
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -314,17 +329,20 @@ h2, h3, h4, h5, h6 {
   text-align: center;
 }
 
-#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type tr > td:first-of-type {
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type tr > td:first-of-type,
+#pd-search-person-container > div > div:nth-of-type(2) > div:first-of-type tr > td:first-of-type {
   width: 200px;
   text-align: left;
   padding-left: 10px;
 }
 
-#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type tr > td:nth-of-type(2) {
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type tr > td:nth-of-type(2),
+#pd-search-person-container > div > div:nth-of-type(2) > div:first-of-type tr > td:nth-of-type(2) {
   width: 400px;
 }
 
-#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type input {
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type input,
+#pd-search-person-container > div > div:nth-of-type(2) > div:first-of-type input  {
   width: 100%;
 }
 
@@ -332,7 +350,7 @@ h2, h3, h4, h5, h6 {
 #pd-search-person-button {
   margin-top: 10px;
   align-self: center;
-  width: 50%;
+  width: 100%;
   height: 40px
 }
 
@@ -391,7 +409,7 @@ button:hover {
   cursor:pointer;
 }
 
-.module button {
+.module-button {
   width: 100px;
   height: 20px;
   border: 0;
