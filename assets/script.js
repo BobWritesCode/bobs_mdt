@@ -178,8 +178,7 @@ function toggleOfficerAvailable() {
   var boloReason = data.boloReason;
   var warnings = data.warnings;
   var data =    "<div class='mdt-inc'>"
-                +   "<button>R</button>"
-                +   "<button>P</button>"
+                +   "<button onclick='openPerson(" + '"' + data.uid + '"' + ")'>>></button>"
                 +   "<p><strong>" + fname + " " + lname + "</strong></p>"
                 +   "<p><strong>Wanted for:</strong> " + boloReason + "</p>"
                 +   "<p><strong>Warning: </strong>" + warnings + "</p>"
