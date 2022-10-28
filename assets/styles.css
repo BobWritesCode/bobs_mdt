@@ -198,7 +198,7 @@ h2, h3, h4, h5, h6 {
   resize: none;
 }
 
-.inc-input {
+.incident-col1 {
   background-color: rgba(0, 0, 0, 0.5) !important; 
   border-bottom: 2px solid rgb(180, 180, 0) !important;
   width: 95% !important;
