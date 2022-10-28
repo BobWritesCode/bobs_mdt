@@ -15,7 +15,7 @@
       <h2>h2</h2>
       <label for="popup-input1">Label 1: </label>
       <input id="popup-input1" type="text" value="">
-      <button id="popup-btn-submit">Submit</button>
+      <button id="popup-btn-submit" class="btn-yellow">Submit</button>
     </div>
   </div>
   <!-- END - Pop up for input-->
@@ -35,12 +35,12 @@
 
     <!-- Navigation bar-->
     <div id="nav">
-      <button class="button" id="btnPdDashboard">Dashboard</button>
-      <button class="button" id="btnPdSearch">Person</button>
-      <button class="button" id="btnPdIncidents">Incidents</button>
-      <button class="button" id="btnPdWarrants">Warrants</button>
-      <button class="button" id="btnDispatch">Dispatch</button>
-      <button class="button" id="btnPdManage">Manage</button>
+      <button class="button btn-yellow" id="btnPdDashboard">Dashboard</button>
+      <button class="button btn-yellow" id="btnPdSearch">Person</button>
+      <button class="button btn-yellow" id="btnPdIncidents">Incidents</button>
+      <button class="button btn-yellow" id="btnPdWarrants">Warrants</button>
+      <button class="button btn-yellow" id="btnDispatch">Dispatch</button>
+      <button class="button btn-yellow" id="btnPdManage">Manage</button>
     </div>
     <!-- END - Navigation bar-->
 
@@ -134,7 +134,7 @@
                 <td><input id="pd-search-dna" type="text" value=""></td>
               </tr>
             </table>
-            <button id="pd-search-person-button">Search</button>
+            <button id="pd-search-person-button" class="btn-yellow">Search</button>
             <!-- PD Search list-->
             <div>
               <table id="search-results">
@@ -219,18 +219,20 @@
             <h2>Search - Incident</h2>
           </div>
           <div>
-            <p>Type in string you wish to search:</p>
-            <table>
-              <tr>
-                <td><label for="pd-search-incident-number">Incident:</label></td>
-                <td><input id="pd-search-incident-number" type="text" value=""></td>
-              </tr>
-              <tr>
-                <td><label for="pd-search-incident-type">Title:</label></td>
-                <td><input id="pd-search-incident-type" type="text" value=""></td>
-              </tr>
-            </table>
-            <button id="pd-search-incident-button">Search</button>
+            <div>
+              <p>Type in string you wish to search:</p>
+              <table>
+                <tr>
+                  <td><label for="pd-search-incident-number">Incident:</label></td>
+                  <td><input id="pd-search-incident-number" type="text" value=""></td>
+                </tr>
+                <tr>
+                  <td><label for="pd-search-incident-type">Title:</label></td>
+                  <td><input id="pd-search-incident-type" type="text" value=""></td>
+                </tr>
+              </table>
+            </div>
+            <button id="pd-search-incident-button" class="btn-yellow">Search</button>
             <!-- PD Search list-->
             <div>
               <table id="search-incident-results">
@@ -271,7 +273,7 @@
               </div>
               <div>
                 <textarea id="txt-add-event"></textarea>
-                <button id="btn-add-event">Add</button>
+                <button id="btn-add-event" class="btn-yellow">Add</button>
               </div>
             </div>
           </div>
