@@ -13,6 +13,8 @@ const btnAddEvent = doc.getElementById('btn-add-event');
 const btnPerformPDSearch = doc.getElementById('pd-search-person-button');
 const btnPerformPDIncident = doc.getElementById('pd-search-incident-button');
 
+const currentUser = "Graves"
+const currentUserRank = "Captain"
 
 window.addEventListener('DOMContentLoaded', function() {
   assignUser()
@@ -43,7 +45,23 @@ window.addEventListener('DOMContentLoaded', function() {
 	btnPerformPDIncident.addEventListener("click", performPdIncidentSearch);
 
 	// PD incidents function calls
-  btnAddEvent.addEventListener("click", addEventToEventHistory);
+  btnAddEvent.addEventListener("click", function() {
+    var date = new Date();
+    var currentTime = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+    var currentDate = date.getDate()+"/"+(date.getMonth()+1)+"/"+ date.getFullYear();
+    var timeUT = currentTime;
+    date = currentDate;
+    var msg = doc.getElementById("txt-add-event").value;
+    var incidentNumber = doc.getElementById('incident-inc-number').innerHTML
+    fakeIncidents[incidentNumber].eventHistory.push([currentUser, timeUT, date, msg]);
+    data = [];
+    data[0] = [];
+    data[0][0] = currentUser;
+    data[0][1] = timeUT;
+    data[0][2] = date;
+    data[0][3] = msg;
+    addEventToEventHistory(data);
+  });
 
 });
 
@@ -98,8 +116,8 @@ function toggleOfficerAvailable() {
   const spanUserName = doc.getElementById("user-name");
   const spanUserRank = doc.getElementById("user-rank");
   const spanUserCallSign = doc.getElementById("user-call-sign");
-  spanUserName.textContent = "Graves"
-  spanUserRank.textContent = "Captain"
+  spanUserName.textContent = currentUser
+  spanUserRank.textContent = currentUserRank
   spanUserCallSign.textContent = "315"
 }
 
@@ -208,23 +226,22 @@ function toggleOfficerAvailable() {
 }
 
 /**
- * Add Most Wanted to dashboard
+ * Add Event to incident event history.
+ * 
+ * `data = [name, time, data, message]`
  */
  function addEventToEventHistory(data) {
-  if (typeof(data) == 'object') {
-    for (let i=0; i < data.length; i++) { 
-      let person = data[i][0];
-      let time = data[i][1];
-      let date = data[i][2];
-      var newEntry =    "<div class='event-entry'>"
-                    +   "<p><strong>" + person + "</strong> @ " + time + " on " + date + ".</p>"
-                    +   "<p>" + data[i][3] + "</p>"
-                    + "</div>"
-      const incidentCol = doc.getElementById("incident-event-history");
-      incidentCol.innerHTML += newEntry;
-    }
-  } else {
-      let text = doc.getElementById("txt-add-event").value;
+  data = data;
+  for (let i=0; i < data.length; i++) { 
+    let person = data[i][0];
+    let time = data[i][1];
+    let date = data[i][2];
+    var newEntry =    "<div class='event-entry'>"
+                  +   "<p><strong>" + person + "</strong> @ " + time + " on " + date + ".</p>"
+                  +   "<p>" + data[i][3] + "</p>"
+                  + "</div>"
+    const incidentCol = doc.getElementById("incident-event-history");
+    incidentCol.innerHTML += newEntry;
   }
   doc.getElementById("txt-add-event").value = "";
 }
@@ -363,17 +380,14 @@ function performPdSearch() {
  */
  function openIncident(data) {
   changeMdtScreen.makeChange('pd-incident-container');
-  for (let i = 0; i < fakeIncidents.length; i++) {
-    if(data == fakeIncidents[i].incidentNumber) {
-      doc.getElementById("incident-inc-number").innerHTML = fakeIncidents[i].incidentNumber;
-      doc.getElementById("incident-inc-title").textContent = fakeIncidents[i].title;
-      doc.getElementById("incident-inc-location").textContent = fakeIncidents[i].location;
-      doc.getElementById("incident-inc-date").textContent = fakeIncidents[i].date;
-      doc.getElementById("incident-inc-uni-time").textContent = fakeIncidents[i].uT;
-      doc.getElementById("incident-inc-loc-time").textContent = fakeIncidents[i].lT;
-      addEventToEventHistory(fakeIncidents[i].eventHistory);
-      break;
-    }
+  if (doc.getElementById("incident-inc-number").innerHTML != fakeIncidents[data].incidentNumber) {
+    doc.getElementById("incident-inc-number").innerHTML = fakeIncidents[data].incidentNumber;
+    doc.getElementById("incident-inc-title").textContent = fakeIncidents[data].title;
+    doc.getElementById("incident-inc-location").textContent = fakeIncidents[data].location;
+    doc.getElementById("incident-inc-date").textContent = fakeIncidents[data].date;
+    doc.getElementById("incident-inc-uni-time").textContent = fakeIncidents[data].uT;
+    doc.getElementById("incident-inc-loc-time").textContent = fakeIncidents[data].lT;
+    addEventToEventHistory(fakeIncidents[data].eventHistory);
   }
  }
 
@@ -504,7 +518,7 @@ const fakePersonToIncident = {
 
 
 const fakeIncidents = [];
-fakeIncidents[0] = {
+fakeIncidents[544841] = {
   'incidentNumber': "544841",
   'title': "Bank Robbery",
   "tenCode": "10-99",
@@ -537,9 +551,9 @@ changeMdtScreen();
 
 addBoloToDash(fakePeople[0]);
 
-addIncidentToDash(fakeIncidents[0]);
-addIncidentToDash(fakeIncidents[0]);
-addIncidentToDash(fakeIncidents[0]);
+addIncidentToDash(fakeIncidents[544841]);
+addIncidentToDash(fakeIncidents[544841]);
+addIncidentToDash(fakeIncidents[544841]);
 
 
 
