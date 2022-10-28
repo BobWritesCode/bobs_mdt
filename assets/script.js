@@ -275,7 +275,7 @@ function performPdSearch() {
       cell2.innerHTML = tableData[i][2];
       cell3.innerHTML = tableData[i][3];
 			cell4.innerHTML = "";
-      cell5.innerHTML = "<button id='" + tableData[i][4] + "' data-id='"+ tableData[i][4] +"' class='btn-goto-person' value>\>\>\></button>";
+      cell5.innerHTML = "<button id='" + tableData[i][4] + "' data-id='"+ tableData[i][4] +"' class='btn-goto-person btn-yellow' value>\>\>\></button>";
 		};
 	};
   // Create button function.
@@ -346,7 +346,7 @@ function performPdSearch() {
 			cell1.innerHTML = tableData[i]["incidentNumber"];
 			cell2.innerHTML = tableData[i]["title"];
 			cell3.innerHTML = "";
-			cell4.innerHTML = "<button id='" + tableData[i][0] + "' data-id='"+ tableData[i][0] +"' class='btn-goto-incident' value>\>\>\></button>";
+			cell4.innerHTML = "<button id='" + tableData[i][0] + "' data-id='"+ tableData[i][0] +"' class='btn-goto-incident btn-yellow' value>\>\>\></button>";
 		};
 
 	};
@@ -399,7 +399,7 @@ function openPerson(data) {
       cell2.innerHTML = fakePersonToIncident[data][i][1];
       cell3.innerHTML = fakePersonToIncident[data][i][2];
       cell4.innerHTML = "";
-      cell5.innerHTML = "<button id='" + fakePersonToIncident[data][i][0] + "' data-id='"+ fakePersonToIncident[data][i][0] +"' class='btn-goto-incident' value>\>\>\></button>";
+      cell5.innerHTML = "<button id='" + fakePersonToIncident[data][i][0] + "' data-id='"+ fakePersonToIncident[data][i][0] +"' class='btn-goto-incident btn-yellow' value>\>\>\></button>";
     };
   };
 
@@ -436,7 +436,7 @@ function openPerson(data) {
       cell2.innerHTML = fakeCars[i][2];
       cell3.innerHTML = fakeCars[i][3];
       cell4.innerHTML = "";
-      cell5.innerHTML = "<button id='" + fakeCars[i][1] + "' data-id='"+ fakeCars[i][1] +"' class='btn-goto-vehicle' value>\>\>\></button>";;
+      cell5.innerHTML = "<button id='" + fakeCars[i][1] + "' data-id='"+ fakeCars[i][1] +"' class='btn-goto-vehicle btn-yellow' value>\>\>\></button>";;
     };
   };
   // Create button function for vehicles.
