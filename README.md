@@ -3,6 +3,11 @@
 ## Features
 
 ### To implement
- EVERYTHING
+
 ### Done
  Nothing
+
+
+## To do list
+
+- Update database with new manual event added.
