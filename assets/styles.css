@@ -10,7 +10,7 @@ body {
   background-color: #333333;
 }
 
-/* Input pop up*/
+/* Input pop up */
 #popup {
   display: none;
   position: fixed;
@@ -93,6 +93,14 @@ h1 {
   font-family: 'Alfa Slab One', cursive;
 }
 
+h2, h3, h4, h5, h6 {
+  font-size: 18px;
+}
+
+* {
+  font-size: 14px;
+}
+
 #pd-dashboard-container,
 #pd-search-person-container,
 #pd-incident-container,
@@ -152,15 +160,6 @@ h1 {
   width: 100%;
 }
 
-.module button {
-  width: 100px;
-  height: 20px;
-  background-color: red;
-  border: 0;
-  color: #fafafa;
-  margin: 2px;
-}
-
 .module input {
   width: 100px;
   height: 20px;
@@ -194,7 +193,6 @@ h1 {
   border: 2px solid #ccc;
   border-radius: 2px;
   background-color: #f8f8f8;
-  font-size: 14px;
   resize: none;
 }
 
@@ -210,14 +208,27 @@ h1 {
   background-color: rgba(0, 0, 0, 0.5); 
   width: 100%;
   color: #fafafa;
-  font-size: 14px;
   margin: 2px 0;
 }
 
 .button {
   padding: 5px 10px 5px 10px;
-  background-color: #c7b600;
+  background-color: #ff1cd9;
   margin: 5px;
+}
+
+.btn-yellow {
+  background-color: #8b8200;
+  color: #353100;
+}
+
+.btn-yellow:hover {
+  background-color: #ffee02;
+  color: #000000;
+}
+
+.btn-yellow-active {
+  background-color: #ffee02;
 }
 
 .break {
@@ -246,7 +257,6 @@ h1 {
   margin: 5px 0;
   background-color: rgb(255, 255, 255, 0.1);
   padding: 5px 10px;
-  font-size: 12px;
   position: relative;
 }
 
@@ -286,16 +296,42 @@ h1 {
 #pd-search-person-container input {
   width: 30%;
   align-self: center;
-  font-size: 23px;
   padding: 5px 10px;
+}
+
+#pd-search-incident-container > div > div:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+
+}
+
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type tr > td:first-of-type {
+  width: 200px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type tr > td:nth-of-type(2) {
+  width: 400px;
+}
+
+#pd-search-incident-container > div > div:nth-of-type(2) > div:first-of-type input {
+  width: 100%;
 }
 
 #pd-search-incident-button,
 #pd-search-person-button {
   margin-top: 10px;
   align-self: center;
-  background-color: #e4d100;
-  color: #333333;
   width: 50%;
   height: 40px
 }
@@ -347,4 +383,32 @@ td:nth-of-type(odd) {
 
 #pd-person-container #person-convictions {
   margin-top: 30px;
+}
+
+/* Buttons */
+
+button:hover {
+  cursor:pointer;
+}
+
+.module button {
+  width: 100px;
+  height: 20px;
+  border: 0;
+  margin: 2px;
+}
+
+.btn-yellow {
+  background-color: #ccbe00;
+  color: #353100;
+  border: 0;
+}
+
+.btn-yellow:hover {
+  background-color: #ffee02;
+  color: #000000;
+}
+
+.btn-yellow-active {
+  background-color: #ffee02;
 }
