@@ -147,17 +147,23 @@ function toggleOfficerAvailable() {
  * Add incident to dashboard
  */
  function addIncidentToDash(data) {
-  let tenCode = "10-36";
-  let incTitle = "Shots Fired";
-  let incNum = "43247";
-  let incLoc = "The Beach";
+	
+  // Get time
+  var date = new Date();
+	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
+	var timeUT = current_time;
+  let incNum = data.incidentNumber;
+  let tenCode = data.tenCode;
+  let incTitle = data.title;
+  let incLoc = data.location;
   let incInf = "Seen heading west."
   var data =    "<div class='mdt-inc'>"
                 +   "<button>R</button>"
                 +   "<p><span class='code10'>" + tenCode + "</span><span>" + incTitle + "</span></p>"
-                +   "<p>Inc: " + incNum + "</p>"
-                +   "<p>Loc: " + incLoc + "</p>"
-                +   "<p>Info: " + incInf + "</p>"
+                +   "<p><strong>Inc:</strong> " + incNum + "</p>"
+                +   "<p><strong>Time:</strong> " + timeUT + " UT / " + timeUT + " LT</p>"
+                +   "<p><strong>Loc:</strong> " + incLoc + "</p>"
+                +   "<p><strong>Info:</strong> " + incInf + "</p>"
                 + "</div>"
   const incidentCol = doc.getElementById("pd-dashboard-incidents");
   incidentCol.innerHTML += data;
@@ -480,6 +486,7 @@ const fakeIncidents = [];
 fakeIncidents[0] = {
   'incidentNumber': "544841",
   'title': "Bank Robbery",
+  "tenCode": "10-99",
   'location': "West Coast Highway",
   'date': "28th Oct 2022",
   'uT': "6:54pm",
@@ -517,18 +524,11 @@ addBoloToDash();
 addBoloToDash();
 addBoloToDash();
 
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
-addIncidentToDash();
+addIncidentToDash(fakeIncidents[0]);
+addIncidentToDash(fakeIncidents[0]);
+addIncidentToDash(fakeIncidents[0]);
+
+
 
 addMostWantedToDash();
 addMostWantedToDash();
