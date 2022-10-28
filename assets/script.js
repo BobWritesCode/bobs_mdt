@@ -147,7 +147,6 @@ function toggleOfficerAvailable() {
  * Add incident to dashboard
  */
  function addIncidentToDash(data) {
-	
   // Get time
   var date = new Date();
 	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
@@ -158,7 +157,7 @@ function toggleOfficerAvailable() {
   let incLoc = data.location;
   let incInf = "Seen heading west."
   var data =    "<div class='mdt-inc'>"
-                +   "<button>R</button>"
+                +   "<button onclick='openIncident(" + '"' + incNum + '"' + ")'>>></button>"
                 +   "<p><span class='code10'>" + tenCode + "</span><span>" + incTitle + "</span></p>"
                 +   "<p><strong>Inc:</strong> " + incNum + "</p>"
                 +   "<p><strong>Time:</strong> " + timeUT + " UT / " + timeUT + " LT</p>"
@@ -212,16 +211,21 @@ function toggleOfficerAvailable() {
  * Add Most Wanted to dashboard
  */
  function addEventToEventHistory(data) {
-  let text = doc.getElementById("txt-add-event").value;
-  let person = "Graves";
-  let time = "5:00pm";
-  let date = "23/10/22"
-  var data =    "<div class='event-entry'>"
-                +   "<p><strong>" + person + "</strong> @ " + time + " on " + date + ".</p>"
-                +   "<p>" + text + "</p>"
-                + "</div>"
-  const incidentCol = doc.getElementById("incident-event-history");
-  incidentCol.innerHTML += data;
+  if (typeof(data) == 'object') {
+    for (let i=0; i < data.length; i++) { 
+      let person = data[i][0];
+      let time = data[i][1];
+      let date = data[i][2];
+      var newEntry =    "<div class='event-entry'>"
+                    +   "<p><strong>" + person + "</strong> @ " + time + " on " + date + ".</p>"
+                    +   "<p>" + data[i][3] + "</p>"
+                    + "</div>"
+      const incidentCol = doc.getElementById("incident-event-history");
+      incidentCol.innerHTML += newEntry;
+    }
+  } else {
+      let text = doc.getElementById("txt-add-event").value;
+  }
   doc.getElementById("txt-add-event").value = "";
 }
 
@@ -311,17 +315,11 @@ function performPdSearch() {
 
 	// Search each row 1 by 1
 	tableData = fakeIncidents;
-	console.log(tableData.length);
-
 	for (let i=0; i<tableData.length; i++) {
-
 		var addToList = false;
-		
 		var j=0;
 		for (const [key, value] of Object.entries(tableData[i])) {
-
 			if (user[j] != "") { 
-
 				var a = user[j].toLowerCase();
 				var b = value.toLowerCase();
 				if (b.includes(a)) {	
@@ -332,13 +330,9 @@ function performPdSearch() {
 				};
 
 			};
-
-			console.log(addToList);
 			j+=1;
 			if (j==2) { break };
-
 		};
-		console.log(addToList);
 		// If potential match add to search results
 		if (addToList) {
 			var row = searchResults.insertRow(-1);
@@ -365,11 +359,29 @@ function performPdSearch() {
 };
 
 /**
+ * Open Incident record on MDT
+ */
+ function openIncident(data) {
+  changeMdtScreen.makeChange('pd-incident-container');
+  for (let i = 0; i < fakeIncidents.length; i++) {
+    if(data == fakeIncidents[i].incidentNumber) {
+      doc.getElementById("incident-inc-number").innerHTML = fakeIncidents[i].incidentNumber;
+      doc.getElementById("incident-inc-title").textContent = fakeIncidents[i].title;
+      doc.getElementById("incident-inc-location").textContent = fakeIncidents[i].location;
+      doc.getElementById("incident-inc-date").textContent = fakeIncidents[i].date;
+      doc.getElementById("incident-inc-uni-time").textContent = fakeIncidents[i].uT;
+      doc.getElementById("incident-inc-loc-time").textContent = fakeIncidents[i].lT;
+      addEventToEventHistory(fakeIncidents[i].eventHistory);
+      break;
+    }
+  }
+ }
+
+/**
  * Open Person's record on MDT
  */
 function openPerson(data) {
   changeMdtScreen.makeChange('pd-person-container');
-
   for (let i = 0; i < fakePeople.length; i++) {
     if(data == fakePeople[i][4]) {
       doc.getElementById("person-name").textContent = fakePeople[i][0] + " " + fakePeople[i][1];
@@ -378,8 +390,6 @@ function openPerson(data) {
       break;
     }
   }
-
-
   // Incident table
 	const personIncidents = doc.getElementById("person-incidents-tbl");
 	personIncidents.innerHTML =	"<tr>"
@@ -389,7 +399,6 @@ function openPerson(data) {
 														+ "<th>Flags</th>"
                             + "<th>Go to</th>"
 														+ "</tr>"; 
-  console.log(fakePersonToIncident[data]);
   if(fakePersonToIncident[data]) {
     for (let i=0; i < fakePersonToIncident[data].length; i++) {
       var row = personIncidents.insertRow(-1);
@@ -414,9 +423,6 @@ function openPerson(data) {
       openIncident(fakeCars[i][1]);
     });
   };
-
-
-
   // Vehicles table
 	const personVehicles = doc.getElementById("person-vehicles-tbl");
 	personVehicles.innerHTML =	"<tr>"
