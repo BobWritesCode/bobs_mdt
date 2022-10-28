@@ -173,19 +173,17 @@ function toggleOfficerAvailable() {
  * Add BOLO to dashboard
  */
  function addBoloToDash(data) {
-  let tenCode = "10-36";
-  let incTitle = "Shots Fired";
-  let incNum = "43247";
-  let incLoc = "The Beach";
-  let incInf = "Seen heading west."
+  var fname = data.fname;
+  var lname = data.lname;
+  var boloReason = data.boloReason;
+  var warnings = data.warnings;
   var data =    "<div class='mdt-inc'>"
                 +   "<button>R</button>"
                 +   "<button>P</button>"
-                +   "<p><span>" + incTitle + "</span></p>"
-                +   "<p>Inc: " + incNum + "</p>"
-                +   "<p>Loc: " + incLoc + "</p>"
-                +   "<p>Info: " + incInf + "</p>"
-                + "</div>"
+                +   "<p><strong>" + fname + " " + lname + "</strong></p>"
+                +   "<p><strong>Wanted for:</strong> " + boloReason + "</p>"
+                +   "<p><strong>Warning: </strong>" + warnings + "</p>"
+                + "</div>";
   const incidentCol = doc.getElementById("pd-dashboard-bolos");
   incidentCol.innerHTML += data;
 }
@@ -464,8 +462,26 @@ function openVehicle(data){
 };
 
 const fakePeople = [];
-fakePeople[0] = ['George', 'Bones', '12/01/85', '7 Park Lane', "67dsf"];
-fakePeople[1] = ['Gary', 'Bones', '27/09/88', '6 Park Lane', "80fre"];
+fakePeople[0] = {
+  "uid": "67dsf",
+  "fname": 'George',
+  "lname": 'Bones',
+  "dob": '12/01/85',
+  "address": '7 Park Lane',
+  "bolo": true,
+  "boloReason": "Bank Robbery",
+  "warnings": "Armed and Dangerous",
+}
+fakePeople[1] = {
+  "uid": "67dsf",
+  "fname": 'Gary',
+  "lname": 'Bones',
+  "dob": '27/09/88',
+  "address": '6 Park Lane',
+  "bolo": false,
+  "boloReason": ""
+}
+
 
 const fakeCars = [];
 fakeCars[0] = ["67dsf","84DNT74", "Fiat", "Puma"];
@@ -514,15 +530,7 @@ fakeIncidents[0] = {
 
 changeMdtScreen();
 
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
-addBoloToDash();
+addBoloToDash(fakePeople[0]);
 
 addIncidentToDash(fakeIncidents[0]);
 addIncidentToDash(fakeIncidents[0]);
