@@ -34,9 +34,6 @@ window.addEventListener('DOMContentLoaded', function() {
 	// Dashboard function calls
   btnDuty.addEventListener("click", toggleDuty);
 	btnOfficerAvailable.addEventListener("click", toggleOfficerAvailable);
-  btnCallSign.addEventListener("click", function() {
-    funcPopup("Call Sign");
-  });
   btnPopupSubmit.addEventListener("click", function() {
     funcPopup.popupSubmit();
 	});
@@ -47,20 +44,19 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	// PD incidents function calls
   btnAddEvent.addEventListener("click", function() {
-    var date = new Date();
-    var currentTime = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-    var currentDate = date.getDate()+"/"+(date.getMonth()+1)+"/"+ date.getFullYear();
-    var timeUT = currentTime;
-    date = currentDate;
-    var msg = doc.getElementById("txt-add-event").value;
-    var incidentNumber = doc.getElementById('incident-inc-number').innerHTML
-    fakeIncidents[incidentNumber].eventHistory.push([currentUser, timeUT, date, msg]);
-    data = [];
+    let date = new Date();
+    let currentTime = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    let currentDate = `${date.getDate()}/${(date.getMonth()+1)}/${date.getFullYear()}`;
+    let timeUT = currentTime;
+    let msg = doc.getElementById("txt-add-event").value;
+    let incidentNumber = doc.getElementById('incident-inc-number').innerHTML
+    fakeIncidents[incidentNumber].eventHistory.push([currentUser, timeUT, currentDate, msg]);
+    const data = [];
     data[0] = [];
     data[0][0] = currentUser;
     data[0][1] = currentCallSign;
     data[0][2] = timeUT;
-    data[0][3] = date;
+    data[0][3] = currentDate;
     data[0][4] = msg;
     addEventToEventHistory(data);
   });
@@ -71,14 +67,16 @@ window.addEventListener('DOMContentLoaded', function() {
 * Change MDT to screen screen
 */
 function changeMdtScreen() {
-	var changeFrom = 'pd-dashboard-container';
+	let changeFrom = 'pd-dashboard-container';
+
 	function makeChange(data) {
-		var changeToDoc = doc.getElementById(data);
-		var changeFromDoc = doc.getElementById(changeFrom);
+		const changeToDoc = doc.getElementById(data);
+		const changeFromDoc = doc.getElementById(changeFrom);
 		changeFromDoc.style.display = "none";
 		changeToDoc.style.display = "flex";
 		changeFrom = data;
 	}
+
 	changeMdtScreen.makeChange = makeChange;
 }
 
@@ -118,9 +116,9 @@ function toggleOfficerAvailable() {
   const spanUserName = doc.getElementById("user-name");
   const spanUserRank = doc.getElementById("user-rank");
   const spanUserCallSign = doc.getElementById("user-call-sign");
-  spanUserName.textContent = currentUser
-  spanUserRank.textContent = currentUserRank
-  spanUserCallSign.textContent = "315"
+  spanUserName.textContent = currentUser;
+  spanUserRank.textContent = currentUserRank;
+  spanUserCallSign.textContent = "315";
 }
 
 
@@ -129,7 +127,7 @@ function toggleOfficerAvailable() {
  */
  function funcPopup(r_reason) {
   const popup = doc.getElementById("popup");
-  var reason = r_reason
+  let reason = r_reason;
   h2 = popup.getElementsByTagName("h2");
   h2[0].innerHTML = reason;
   if (popup.style.display != "block") {
@@ -141,7 +139,7 @@ function toggleOfficerAvailable() {
     const popup = doc.getElementById("popup");
     popup.style.display = "none";
     let input1 = doc.getElementById("popup-input1");
-    var data = input1.value;
+    let data = input1.value;
     popup.style.display = "none";
     switch(reason) {
       case "Call Sign":
@@ -168,63 +166,62 @@ function toggleOfficerAvailable() {
  */
  function addIncidentToDash(data) {
   // Get time
-  var date = new Date();
-	var current_time = date.getHours()+":"+date.getMinutes()+":"+ date.getSeconds();
-	var timeUT = current_time;
+  let date = new Date();
+	let current_time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+	let timeUT = current_time;
   let incNum = data.incidentNumber;
   let tenCode = data.tenCode;
   let incTitle = data.title;
   let incLoc = data.location;
-  let incInf = "Seen heading west."
-  var data =    "<div class='mdt-inc'>"
-                +   "<button onclick='openIncident(" + '"' + incNum + '"' + ")'>>></button>"
-                +   "<p><span class='code10'>" + tenCode + "</span><span>" + incTitle + "</span></p>"
-                +   "<p><strong>Inc:</strong> " + incNum + "</p>"
-                +   "<p><strong>Time:</strong> " + timeUT + " UT / " + timeUT + " LT</p>"
-                +   "<p><strong>Loc:</strong> " + incLoc + "</p>"
-                +   "<p><strong>Info:</strong> " + incInf + "</p>"
-                + "</div>"
+  let incInf = 'Seen heading west.'
+  let newDiv = `<div class='mdt-inc'>`
+             + `<button onclick='openIncident("${incNum}")'></button>`
+             + `<p><span class="code10"> ${tenCode} </span><span> ${incTitle}</span></p>`
+             + `<p><strong>Inc:</strong> ${incNum}</p>`
+             + `<p><strong>Time:</strong> ${timeUT} UT / ${timeUT} LT</p>`
+             + `<p><strong>Loc:</strong> ${incLoc}</p>`
+             + `<p><strong>Info:</strong> ${incInf}</p>`
+             + `</div>`
   const incidentCol = doc.getElementById("pd-dashboard-incidents");
-  incidentCol.innerHTML += data;
+  incidentCol.innerHTML += newDiv;
 }
 
 /**
  * Add BOLO to dashboard
  */
  function addBoloToDash(data) {
-  var fname = data.fname;
-  var lname = data.lname;
-  var boloReason = data.boloReason;
-  var warnings = data.warnings;
-  var data =    "<div class='mdt-inc'>"
-                +   "<button onclick='openPerson(" + '"' + data.uid + '"' + ")'>>></button>"
-                +   "<p><strong>" + fname + " " + lname + "</strong></p>"
-                +   "<p><strong>Wanted for:</strong> " + boloReason + "</p>"
-                +   "<p><strong>Warning: </strong>" + warnings + "</p>"
-                + "</div>";
+  let fname = data.fname;
+  let lname = data.lname;
+  let boloReason = data.boloReason;
+  let warnings = data.warnings;
+  let newDiv = `<div class='mdt-inc'>`
+             + `<button onclick="openPerson('${data.uid}')"></button>`
+             + `<p><strong>${fname} ${lname}</strong></p>`
+             + `<p><strong>Wanted for:</strong> ${boloReason}</p>`
+             + `<p><strong>Warning:</strong> ${warnings}</p>`
+             + `</div>`;
   const incidentCol = doc.getElementById("pd-dashboard-bolos");
-  incidentCol.innerHTML += data;
+  incidentCol.innerHTML += newDiv;
 }
 
 /**
  * Add Most Wanted to dashboard
  */
  function addMostWantedToDash(data) {
-  let tenCode = "10-36";
   let incTitle = "Shots Fired";
   let incNum = "43247";
   let incLoc = "The Beach";
   let incInf = "Seen heading west."
-  var data =    "<div class='mdt-inc'>"
-                +   "<button>R</button>"
-                +   "<button>P</button>"
-                +   "<p><span>" + incTitle + "</span></p>"
-                +   "<p>Inc: " + incNum + "</p>"
-                +   "<p>Loc: " + incLoc + "</p>"
-                +   "<p>Info: " + incInf + "</p>"
-                + "</div>";
+  let newDiv = `<div class='mdt-inc'>`
+             + `<button>R</button>`
+             + `<button>P</button>`
+             + `<p><span>${incTitle}</span></p>`
+             + `<p>Inc: ${incNum}</p>`
+             + `<p>Loc: ${incLoc}</p>`
+             + `<p>Info: ${incInf}</p>`
+             + `</div>`;
   const incidentCol = doc.getElementById("pd-dashboard-most-wanted");
-  incidentCol.innerHTML += data;
+  incidentCol.innerHTML += newDiv;
 }
 
 /**
@@ -240,12 +237,12 @@ function toggleOfficerAvailable() {
       let callSign = data[i][1];
       let time = data[i][2];
       let date = data[i][3];
-      var newEntry =    "<div class='event-entry'>"
-                    +   "<p><strong>" + person + "</strong> (" + callSign + ") @ " + time + " on " + date + ".</p>"
-                    +   "<p>" + data[i][4] + "</p>"
-                    + "</div>"
+      let newDiv = `<div class='event-entry'>`
+                 + `<p><strong>${person}</strong> (${callSign}) @ ${time} on ${date}.</p>`
+                 + `<p>${data[i][4]}</p>`
+                 + `</div>`
       const incidentCol = doc.getElementById("incident-event-history");
-      incidentCol.innerHTML += newEntry;
+      incidentCol.innerHTML += newDiv;
     }
   }
   doc.getElementById("txt-add-event").value = "";
@@ -256,7 +253,7 @@ function toggleOfficerAvailable() {
  * Perform search on the PD MDT Search screen
  */
 function performPdSearch() {
-  var user = [];
+  const user = [];
 	user[0] = doc.getElementById('pd-search-fname').value;
 	user[1] = doc.getElementById('pd-search-sname').value;
 	user[2] = doc.getElementById('pd-search-dob').value;
@@ -265,25 +262,27 @@ function performPdSearch() {
 	// Set up table header
 	const searchResults = doc.getElementById("search-results");
 	searchResults.innerHTML =	"<tr>"
-														+ "<th>Name</th>"
-														+ "<th>DOB</th>"
-														+ "<th>Address</th>"
-														+ "<th>Flags</th>"
-														+ "</tr>"; 
+													+ "<th>Name</th>"
+													+ "<th>DOB</th>"
+													+ "<th>Address</th>"
+													+ "<th>Flags</th>"
+                          + "</tr>"; 
 
-	// Search each row 1 by 1
-	tableData = fakePeople;
-	for (let i=0; i < tableData.length; i++) {
-		var addToList = false;
-		var key = tableData[i]
+	for (let i=0; i < fakePeople.length; i++) {
+
+		let addToList = false;
+		let key = fakePeople[i]
 
 		// Check each user inout for blank
 		// true continue
 		// false check against person attr, if match add to list
 		for (let j=0; j < user.length; j++) {
-			if (user[j] == "") { continue }
-				var a = key[j].toLowerCase();
-				var b = user[j].toLowerCase();
+
+			if (user[j] == "") { continue };
+
+			var a = key[j].toLowerCase();
+			var b = user[j].toLowerCase();
+
 			if (a.includes(b)) {	
 				addToList = true;
 			 } else {
@@ -294,17 +293,17 @@ function performPdSearch() {
 
 		// If potential match add to search results
 		if (addToList) {
-      var row = searchResults.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
-      cell1.innerHTML = tableData[i][0] + " " + tableData[i][1];
-      cell2.innerHTML = tableData[i][2];
-      cell3.innerHTML = tableData[i][3];
+      const row = searchResults.insertRow(-1);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell(2);
+      let cell4 = row.insertCell(3);
+      let cell5 = row.insertCell(4);
+      cell1.innerHTML = `${fakePeople[i][0]} ${fakePeople[i][1]}`;
+      cell2.innerHTML = fakePeople[i][2];
+      cell3.innerHTML = fakePeople[i][3];
 			cell4.innerHTML = "";
-      cell5.innerHTML = "<button id='" + tableData[i][4] + "' data-id='"+ tableData[i][4] +"' class='btn-goto-person btn-yellow' value>\>\>\></button>";
+      cell5.innerHTML = `<button id='${fakePeople[i][4]}' data-id='${fakePeople[i][4]}' class='btn-goto-person btn-yellow' value>Goto</button>`;
 		};
 	};
   // Create button function.
@@ -312,7 +311,7 @@ function performPdSearch() {
   for (let i = 0; i < btnPdOpenPerson.length; i++) {
     btnPdOpenPerson[i].addEventListener("click", function() {
       // Character unique ID to assign to button.
-      openPerson(tableData[i][4]);
+      openPerson(fakePeople[i][4]);
     });
   }
 };
@@ -322,24 +321,25 @@ function performPdSearch() {
  * Perform Incident search on the PD MDT Search screen
  */
  function performPdIncidentSearch() {
-  var user = [];
+  const user = [];
 	user[0] = doc.getElementById('pd-search-incident-number').value;
 	user[1] = doc.getElementById('pd-search-incident-type').value;
-	console.log(user)
 	// Set up table header
 	const searchResults = doc.getElementById("search-incident-results");
 	searchResults.innerHTML =	"<tr>"
-														+ "<th>Incident number:</th>"
-														+ "<th>Type</th>"
-														+ "<th>Flags</th>"
-														+ "<th>Goto</th>"
-														+ "</tr>"; 
+													+ "<th>Incident number:</th>"
+													+ "<th>Type</th>"
+													+ "<th>Flags</th>"
+													+ "<th>Goto</th>"
+													+ "</tr>"; 
 
 	// Search each row 1 by 1
 	tableData = fakeIncidents;
-	for (let i=0; i<tableData.length; i++) {
-		var addToList = false;
-		var j=0;
+	for (let i = 0; i < tableData.length; i++) {
+		let addToList = false;
+		let j=0;
+
+    // Needs to be replaced with SQL query
 		for (const [key, value] of Object.entries(tableData[i])) {
 			if (user[j] != "") { 
 				var a = user[j].toLowerCase();
@@ -352,21 +352,21 @@ function performPdSearch() {
 				};
 
 			};
-			j+=1;
-			if (j==2) { break };
+			j += 1;
+			if (j == 2) { break };
 		};
     
 		// If potential match add to search results
 		if (addToList) {
-			var row = searchResults.insertRow(-1);
-			var cell1 = row.insertCell(0);
-			var cell2 = row.insertCell(1);
-			var cell3 = row.insertCell(2);
-			var cell4 = row.insertCell(3);
+			const row = searchResults.insertRow(-1);
+			let cell1 = row.insertCell(0);
+			let cell2 = row.insertCell(1);
+			let cell3 = row.insertCell(2);
+			let cell4 = row.insertCell(3);
 			cell1.innerHTML = tableData[i]["incidentNumber"];
 			cell2.innerHTML = tableData[i]["title"];
 			cell3.innerHTML = "";
-			cell4.innerHTML = "<button id='" + tableData[i][0] + "' data-id='"+ tableData[i][0] +"' class='btn-goto-incident btn-yellow' value>\>\>\></button>";
+			cell4.innerHTML = `<button id=' ${tableData[i][0]}' data-id='${tableData[i][0]}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
 		};
 
 	};
@@ -404,7 +404,7 @@ function openPerson(data) {
   changeMdtScreen.makeChange('pd-person-container');
   for (let i = 0; i < fakePeople.length; i++) {
     if(data == fakePeople[i][4]) {
-      doc.getElementById("person-name").textContent = fakePeople[i][0] + " " + fakePeople[i][1];
+      doc.getElementById("person-name").textContent = `${fakePeople[i][0]} ${fakePeople[i][1]}`;
       doc.getElementById("person-dob").textContent = fakePeople[i][2];
       doc.getElementById("person-address").textContent = fakePeople[i][3];
       break;
@@ -421,17 +421,17 @@ function openPerson(data) {
 														+ "</tr>"; 
   if(fakePersonToIncident[data]) {
     for (let i=0; i < fakePersonToIncident[data].length; i++) {
-      var row = personIncidents.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
+      const row = personIncidents.insertRow(-1);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell(2);
+      let cell4 = row.insertCell(3);
+      let cell5 = row.insertCell(4);
       cell1.innerHTML = fakePersonToIncident[data][i][0];
       cell2.innerHTML = fakePersonToIncident[data][i][1];
       cell3.innerHTML = fakePersonToIncident[data][i][2];
       cell4.innerHTML = "";
-      cell5.innerHTML = "<button id='" + fakePersonToIncident[data][i][0] + "' data-id='"+ fakePersonToIncident[data][i][0] +"' class='btn-goto-incident btn-yellow' value>\>\>\></button>";
+      cell5.innerHTML = `<button id='${fakePersonToIncident[data][i][0]}' data-id='${fakePersonToIncident[data][i][0]}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
     };
   };
 
@@ -446,28 +446,29 @@ function openPerson(data) {
   // Vehicles table
 	const personVehicles = doc.getElementById("person-vehicles-tbl");
 	personVehicles.innerHTML =	"<tr>"
-														+ "<th>Red</th>"
-														+ "<th>Make</th>"
-														+ "<th>Model</th>"
-														+ "<th>Flags</th>"
-                            + "<th>Go to</th>"
-														+ "</tr>"; 
+													 + "<th>Red</th>"
+											 	   + "<th>Make</th>"
+										 			 + "<th>Model</th>"
+													 + "<th>Flags</th>"
+													 + "<th>Go to</th>"
+													 + "</tr>"; 
 
-  for (let i=0; i<fakeCars.length; i++) {
+  for (let i = 0;  i < fakeCars.length; i++) {
     if(data == fakeCars[i][0]) {
-      var row = personVehicles.insertRow(-1);
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      var cell3 = row.insertCell(2);
-      var cell4 = row.insertCell(3);
-      var cell5 = row.insertCell(4);
+      const row = personVehicles.insertRow(-1);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell(2);
+      let cell4 = row.insertCell(3);
+      let cell5 = row.insertCell(4);
       cell1.innerHTML = fakeCars[i][1];
       cell2.innerHTML = fakeCars[i][2];
       cell3.innerHTML = fakeCars[i][3];
       cell4.innerHTML = "";
-      cell5.innerHTML = "<button id='" + fakeCars[i][1] + "' data-id='"+ fakeCars[i][1] +"' class='btn-goto-vehicle btn-yellow' value>\>\>\></button>";;
+      cell5.innerHTML = `<button id='${fakeCars[i][1]}' data-id='${fakeCars[i][1]}fakeCars[i][1]' class='btn-goto-vehicle btn-yellow' value>Goto</button>`;
     };
   };
+  
   // Create button function for vehicles.
   const btnPdOpenVehicle = document.getElementsByClassName("btn-goto-vehicle");
   for (let i = 0; i < btnPdOpenVehicle.length; i++) {
@@ -487,6 +488,7 @@ function openVehicle(data){
 };
 
 const fakePeople = [];
+
 fakePeople[0] = {
   "uid": "67dsf",
   "fname": 'George',
