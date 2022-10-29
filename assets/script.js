@@ -15,6 +15,7 @@ const btnPerformPDIncident = doc.getElementById('pd-search-incident-button');
 
 const currentUser = "Graves"
 const currentUserRank = "Captain"
+const currentCallSign = "315"
 
 window.addEventListener('DOMContentLoaded', function() {
   assignUser()
@@ -57,9 +58,10 @@ window.addEventListener('DOMContentLoaded', function() {
     data = [];
     data[0] = [];
     data[0][0] = currentUser;
-    data[0][1] = timeUT;
-    data[0][2] = date;
-    data[0][3] = msg;
+    data[0][1] = currentCallSign;
+    data[0][2] = timeUT;
+    data[0][3] = date;
+    data[0][4] = msg;
     addEventToEventHistory(data);
   });
 
@@ -232,16 +234,19 @@ function toggleOfficerAvailable() {
  */
  function addEventToEventHistory(data) {
   data = data;
-  for (let i=0; i < data.length; i++) { 
-    let person = data[i][0];
-    let time = data[i][1];
-    let date = data[i][2];
-    var newEntry =    "<div class='event-entry'>"
-                  +   "<p><strong>" + person + "</strong> @ " + time + " on " + date + ".</p>"
-                  +   "<p>" + data[i][3] + "</p>"
-                  + "</div>"
-    const incidentCol = doc.getElementById("incident-event-history");
-    incidentCol.innerHTML += newEntry;
+  if (data[0][3]) {
+    for (let i=0; i < data.length; i++) { 
+      let person = data[i][0];
+      let callSign = data[i][1];
+      let time = data[i][2];
+      let date = data[i][3];
+      var newEntry =    "<div class='event-entry'>"
+                    +   "<p><strong>" + person + "</strong> (" + callSign + ") @ " + time + " on " + date + ".</p>"
+                    +   "<p>" + data[i][4] + "</p>"
+                    + "</div>"
+      const incidentCol = doc.getElementById("incident-event-history");
+      incidentCol.innerHTML += newEntry;
+    }
   }
   doc.getElementById("txt-add-event").value = "";
 }
@@ -350,6 +355,7 @@ function performPdSearch() {
 			j+=1;
 			if (j==2) { break };
 		};
+    
 		// If potential match add to search results
 		if (addToList) {
 			var row = searchResults.insertRow(-1);
@@ -528,9 +534,9 @@ fakeIncidents[544841] = {
   'lT': "10:21am",
   'creation': "Dispatch",
   'eventHistory': [
-    ["Dispatch", "6:59pm", "28/10/2022", "Officer Graves has arrived on scene"],
-    ["Graves", "7:01pm", "28/10/2022", "2 suspects, 1 hostage."],
-    ["Graves", "7:01pm", "28/10/2022", "Negotiated hostage to be set free in exchange for clean chase."],
+    ["Dispatch", "000", "6:59pm", "28/10/2022", "Officer Graves has arrived on scene"],
+    ["Graves", "315", "7:01pm", "28/10/2022", "2 suspects, 1 hostage."],
+    ["Graves", "315", "7:01pm", "28/10/2022", "Negotiated hostage to be set free in exchange for clean chase."],
   ],
   'suspects': [
     ["Unknown", "Clown suit"],
