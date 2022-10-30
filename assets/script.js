@@ -254,10 +254,10 @@ function toggleOfficerAvailable() {
  */
 function performPdSearch() {
   const user = [];
-	user[0] = doc.getElementById('pd-search-fname').value;
-	user[1] = doc.getElementById('pd-search-sname').value;
+	user[0] = doc.getElementById('pd-search-fname').value.toLowerCase();
+	user[1] = doc.getElementById('pd-search-sname').value.toLowerCase();
 	user[2] = doc.getElementById('pd-search-dob').value;
-	user[3] = doc.getElementById('pd-search-address').value;
+	user[3] = doc.getElementById('pd-search-address').value.toLowerCase();
 
 	// Set up table header
 	const searchResults = doc.getElementById("search-results");
@@ -270,27 +270,16 @@ function performPdSearch() {
 
 	for (let i=0; i < fakePeople.length; i++) {
 
-		let addToList = false;
 		let key = fakePeople[i]
+		let addToList = false;
 
-		// Check each user inout for blank
-		// true continue
-		// false check against person attr, if match add to list
-		for (let j=0; j < user.length; j++) {
-
-			if (user[j] == "") { continue };
-
-			var a = key[j].toLowerCase();
-			var b = user[j].toLowerCase();
-
-			if (a.includes(b)) {	
-				addToList = true;
-			 } else {
-				addToList = false;
-				break;
-			 }
-		};
-
+    if (user[0] != "") {
+      addToList = key.fname.toLowerCase().includes(user[0]) ? true : false;
+    }
+    if (user[1] != "") {
+      addToList = key.lname.toLowerCase().includes(user[1]) ? true : false;
+    }
+    
 		// If potential match add to search results
 		if (addToList) {
       const row = searchResults.insertRow(-1);
@@ -299,19 +288,20 @@ function performPdSearch() {
       let cell3 = row.insertCell(2);
       let cell4 = row.insertCell(3);
       let cell5 = row.insertCell(4);
-      cell1.innerHTML = `${fakePeople[i][0]} ${fakePeople[i][1]}`;
-      cell2.innerHTML = fakePeople[i][2];
-      cell3.innerHTML = fakePeople[i][3];
+      cell1.innerHTML = `${fakePeople[i].fname} ${fakePeople[i].lname}`;
+      cell2.innerHTML = fakePeople[i].dob;
+      cell3.innerHTML = fakePeople[i].address;
 			cell4.innerHTML = "";
-      cell5.innerHTML = `<button id='${fakePeople[i][4]}' data-id='${fakePeople[i][4]}' class='btn-goto-person btn-yellow' value>Goto</button>`;
+      cell5.innerHTML = `<button id='${fakePeople[i].uid}' data-id='${fakePeople[i].uid}' class='btn-goto-person btn-yellow' value>Goto</button>`; 
 		};
 	};
+
   // Create button function.
   const btnPdOpenPerson = document.getElementsByClassName("btn-goto-person");
   for (let i = 0; i < btnPdOpenPerson.length; i++) {
     btnPdOpenPerson[i].addEventListener("click", function() {
       // Character unique ID to assign to button.
-      openPerson(fakePeople[i][4]);
+      openPerson(fakePeople[i].uid);
     });
   }
 };
@@ -400,13 +390,13 @@ function performPdSearch() {
 /**
  * Open Person's record on MDT
  */
-function openPerson(data) {
+function openPerson(r_uid) {
   changeMdtScreen.makeChange('pd-person-container');
   for (let i = 0; i < fakePeople.length; i++) {
-    if(data == fakePeople[i][4]) {
-      doc.getElementById("person-name").textContent = `${fakePeople[i][0]} ${fakePeople[i][1]}`;
-      doc.getElementById("person-dob").textContent = fakePeople[i][2];
-      doc.getElementById("person-address").textContent = fakePeople[i][3];
+    if(r_uid == fakePeople[i].uid) {
+      doc.getElementById("person-name").textContent = `${fakePeople[i].fname} ${fakePeople[i].lname}`;
+      doc.getElementById("person-dob").textContent = fakePeople[i].dob;
+      doc.getElementById("person-address").textContent = fakePeople[i].address;
       break;
     }
   }
@@ -419,19 +409,19 @@ function openPerson(data) {
 														+ "<th>Flags</th>"
                             + "<th>Go to</th>"
 														+ "</tr>"; 
-  if(fakePersonToIncident[data]) {
-    for (let i=0; i < fakePersonToIncident[data].length; i++) {
+  if(fakePersonToIncident[r_uid]) {
+    for (let i=0; i < fakePersonToIncident[r_uid].length; i++) {
       const row = personIncidents.insertRow(-1);
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
       let cell3 = row.insertCell(2);
       let cell4 = row.insertCell(3);
       let cell5 = row.insertCell(4);
-      cell1.innerHTML = fakePersonToIncident[data][i][0];
-      cell2.innerHTML = fakePersonToIncident[data][i][1];
-      cell3.innerHTML = fakePersonToIncident[data][i][2];
+      cell1.innerHTML = fakePersonToIncident[r_uid][i][0];
+      cell2.innerHTML = fakePersonToIncident[r_uid][i][1];
+      cell3.innerHTML = fakePersonToIncident[r_uid][i][2];
       cell4.innerHTML = "";
-      cell5.innerHTML = `<button id='${fakePersonToIncident[data][i][0]}' data-id='${fakePersonToIncident[data][i][0]}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
+      cell5.innerHTML = `<button id='${fakePersonToIncident[r_uid][i][0]}' data-id='${fakePersonToIncident[r_uid][i][0]}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
     };
   };
 
@@ -454,7 +444,7 @@ function openPerson(data) {
 													 + "</tr>"; 
 
   for (let i = 0;  i < fakeCars.length; i++) {
-    if(data == fakeCars[i][0]) {
+    if(r_uid == fakeCars[i][0]) {
       const row = personVehicles.insertRow(-1);
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
@@ -500,7 +490,7 @@ fakePeople[0] = {
   "warnings": "Armed and Dangerous",
 }
 fakePeople[1] = {
-  "uid": "67dsf",
+  "uid": "34234g",
   "fname": 'Gary',
   "lname": 'Bones',
   "dob": '27/09/88',
