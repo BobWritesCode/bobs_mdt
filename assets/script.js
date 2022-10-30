@@ -82,8 +82,8 @@ function changeMdtScreen() {
 
 
 /**
- * Toggle on and off duty
- */
+* Toggle on and off duty
+*/
 function toggleDuty() {
   if (btnDuty.textContent == "On") {
     btnDuty.textContent = "Out";
@@ -96,8 +96,8 @@ function toggleDuty() {
 
 
 /**
- * Toggle availability
- */
+* Toggle availability
+*/
 function toggleOfficerAvailable() {
   if (btnOfficerAvailable.textContent == "Yes") {
     btnOfficerAvailable.textContent = "No";
@@ -110,8 +110,8 @@ function toggleOfficerAvailable() {
 
 
 /**
- * Assign user
- */
+* Assign user
+*/
  function assignUser() {
   const spanUserName = doc.getElementById("user-name");
   const spanUserRank = doc.getElementById("user-rank");
@@ -123,9 +123,9 @@ function toggleOfficerAvailable() {
 
 
 /**
- * Open / Close popup
- */
- function funcPopup(r_reason) {
+* Open / Close popup
+*/
+function funcPopup(r_reason) {
   const popup = doc.getElementById("popup");
   let reason = r_reason;
   h2 = popup.getElementsByTagName("h2");
@@ -153,18 +153,18 @@ function toggleOfficerAvailable() {
 }
 
 /**
- * Change call sign
- */
- function changeCallSign(data) {
+* Change call sign
+*/
+function changeCallSign(data) {
   const spanUserCallSign = doc.getElementById("-");
   spanUserCallSign.textContent = data
 }
 
 
 /**
- * Add incident to dashboard
- */
- function addIncidentToDash(data) {
+* Add incident to dashboard
+*/
+function addIncidentToDash(data) {
   // Get time
   let date = new Date();
 	let current_time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -187,9 +187,9 @@ function toggleOfficerAvailable() {
 }
 
 /**
- * Add BOLO to dashboard
- */
- function addBoloToDash(data) {
+* Add BOLO to dashboard
+*/
+function addBoloToDash(data) {
   let fname = data.fname;
   let lname = data.lname;
   let boloReason = data.boloReason;
@@ -205,9 +205,9 @@ function toggleOfficerAvailable() {
 }
 
 /**
- * Add Most Wanted to dashboard
- */
- function addMostWantedToDash(data) {
+* Add Most Wanted to dashboard
+*/
+function addMostWantedToDash(data) {
   let incTitle = "Shots Fired";
   let incNum = "43247";
   let incLoc = "The Beach";
@@ -225,11 +225,10 @@ function toggleOfficerAvailable() {
 }
 
 /**
- * Add Event to incident event history.
- * 
- * `data = [name, time, data, message]`
- */
- function addEventToEventHistory(data) {
+* Add Event to incident event history.
+* `data = [name, time, data, message]`
+*/
+function addEventToEventHistory(data) {
   data = data;
   if (data[0][3]) {
     for (let i=0; i < data.length; i++) { 
@@ -250,15 +249,14 @@ function toggleOfficerAvailable() {
 
 
 /**
- * Perform search on the PD MDT Search screen
- */
+* Perform search on the PD MDT Search screen
+*/
 function performPdSearch() {
   const user = [];
 	user[0] = doc.getElementById('pd-search-fname').value.toLowerCase();
 	user[1] = doc.getElementById('pd-search-sname').value.toLowerCase();
 	user[2] = doc.getElementById('pd-search-dob').value;
 	user[3] = doc.getElementById('pd-search-address').value.toLowerCase();
-
 	// Set up table header
 	const searchResults = doc.getElementById("search-results");
 	searchResults.innerHTML =	"<tr>"
@@ -269,17 +267,14 @@ function performPdSearch() {
                           + "</tr>"; 
 
 	for (let i=0; i < fakePeople.length; i++) {
-
 		let key = fakePeople[i]
 		let addToList = false;
-
     if (user[0] != "") {
       addToList = key.fname.toLowerCase().includes(user[0]) ? true : false;
     }
     if (user[1] != "") {
       addToList = key.lname.toLowerCase().includes(user[1]) ? true : false;
     }
-    
 		// If potential match add to search results
 		if (addToList) {
       const row = searchResults.insertRow(-1);
@@ -292,25 +287,22 @@ function performPdSearch() {
       cell2.innerHTML = fakePeople[i].dob;
       cell3.innerHTML = fakePeople[i].address;
 			cell4.innerHTML = "";
-      cell5.innerHTML = `<button id='${fakePeople[i].uid}' data-id='${fakePeople[i].uid}' class='btn-goto-person btn-yellow' value>Goto</button>`; 
+      cell5.innerHTML = `<button data-uid='${fakePeople[i].uid}' class='btn-goto-person btn-yellow' value>Goto</button>`; 
 		};
 	};
-
   // Create button function.
   const btnPdOpenPerson = document.getElementsByClassName("btn-goto-person");
   for (let i = 0; i < btnPdOpenPerson.length; i++) {
     btnPdOpenPerson[i].addEventListener("click", function() {
-      // Character unique ID to assign to button.
-      openPerson(fakePeople[i].uid);
+      openPerson(btnPdOpenPerson[i].dataset.uid);
     });
   }
 };
 
-
 /**
- * Perform Incident search on the PD MDT Search screen
- */
- function performPdIncidentSearch() {
+* Perform Incident search on the PD MDT Search screen
+*/
+function performPdIncidentSearch() {
   const user = [];
 	user[0] = doc.getElementById('pd-search-incident-number').value;
 	user[1] = doc.getElementById('pd-search-incident-type').value.toLowerCase();
@@ -326,17 +318,14 @@ function performPdSearch() {
 	// Search each row 1 by 1
 	tableData = fakeIncidents;
 	for (let i = 0; i < tableData.length; i++) {
-
     let key = tableData[i];
 		let addToList = false;
-
     if (user[0] != "") {
       addToList = key.incidentNumber.includes(user[0]) ? true : false;
     }
     if (user[1] != "") {
       addToList = key.title.toLowerCase().includes(user[1]) ? true : false;
     }
-    
 		// If potential match add to search results
 		if (addToList) {
 			const row = searchResults.insertRow(-1);
@@ -349,39 +338,38 @@ function performPdSearch() {
 			cell3.innerHTML = "";
 			cell4.innerHTML = `<button data-uid='${key.incidentNumber}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
 		};
-
 	};
-
   // Create button function.
   const btnPdOpenIncident = document.getElementsByClassName("btn-goto-incident");
   for (let i = 0; i < btnPdOpenIncident.length; i++) {
     btnPdOpenIncident[i].addEventListener("click", function() {
-      console.log(btnPdOpenIncident[i])
-      // Character unique ID to assign to button.
       openIncident(btnPdOpenIncident[i].dataset.uid);
     });
   };
 };
 
 /**
- * Open Incident record on MDT
- */
- function openIncident(data) {
+* Open Incident record on MDT
+*/
+function openIncident(r_uid) {
   changeMdtScreen.makeChange('pd-incident-container');
-  if (doc.getElementById("incident-inc-number").innerHTML != fakeIncidents[data].incidentNumber) {
-    doc.getElementById("incident-inc-number").innerHTML = fakeIncidents[data].incidentNumber;
-    doc.getElementById("incident-inc-title").textContent = fakeIncidents[data].title;
-    doc.getElementById("incident-inc-location").textContent = fakeIncidents[data].location;
-    doc.getElementById("incident-inc-date").textContent = fakeIncidents[data].date;
-    doc.getElementById("incident-inc-uni-time").textContent = fakeIncidents[data].uT;
-    doc.getElementById("incident-inc-loc-time").textContent = fakeIncidents[data].lT;
-    addEventToEventHistory(fakeIncidents[data].eventHistory);
-  }
- }
+  for (let i = 0; i < fakeIncidents.length; i++) {
+    if(r_uid == fakeIncidents[i].incidentNumber) {
+      doc.getElementById("incident-inc-number").innerHTML = fakeIncidents[i].incidentNumber;
+      doc.getElementById("incident-inc-title").textContent = fakeIncidents[i].title;
+      doc.getElementById("incident-inc-location").textContent = fakeIncidents[i].location;
+      doc.getElementById("incident-inc-date").textContent = fakeIncidents[i].date;
+      doc.getElementById("incident-inc-uni-time").textContent = fakeIncidents[i].uT;
+      doc.getElementById("incident-inc-loc-time").textContent = fakeIncidents[i].lT;
+      addEventToEventHistory(fakeIncidents[i].eventHistory);
+      break;
+    };
+  };
+};
 
 /**
- * Open Person's record on MDT
- */
+* Open Person's record on MDT
+*/
 function openPerson(r_uid) {
   changeMdtScreen.makeChange('pd-person-container');
   for (let i = 0; i < fakePeople.length; i++) {
@@ -463,14 +451,13 @@ function openPerson(r_uid) {
 
 
 /**
- * 
- */
+* 
+*/
 function openVehicle(data){
 
 };
 
 const fakePeople = [];
-
 fakePeople[0] = {
   "uid": "67dsf",
   "fname": 'George',
@@ -491,7 +478,6 @@ fakePeople[1] = {
   "boloReason": ""
 }
 
-
 const fakeCars = [];
 fakeCars[0] = ["67dsf","84DNT74", "Fiat", "Puma"];
 fakeCars[1] = ["67dsf","92HGN22", "Ford", "Mustang"];
@@ -500,12 +486,9 @@ fakeCars[3] = ["67dsf","26TFC84", "Fiat", "Fox"];
 fakeCars[4] = ["67dsf","21TJD46", "Ford", "Panda"];
 fakeCars[5] = ["67dsf","54TDB48", "Junk", "Lion"];
 
-
 const fakePersonToIncident = {
   "67dsf": [["544841", "Bank Robbery", "Witness"],["345323", "Noise complaint", "Witness"],],
 }
-
-
 
 const fakeIncidents = [];
 fakeIncidents[0] = {
@@ -538,15 +521,10 @@ fakeIncidents[0] = {
 }
 
 changeMdtScreen();
-
 addBoloToDash(fakePeople[0]);
-
 addIncidentToDash(fakeIncidents[0]);
 addIncidentToDash(fakeIncidents[0]);
 addIncidentToDash(fakeIncidents[0]);
-
-
-
 addMostWantedToDash();
 addMostWantedToDash();
 addMostWantedToDash();
