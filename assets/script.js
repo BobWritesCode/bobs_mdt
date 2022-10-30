@@ -313,7 +313,7 @@ function performPdSearch() {
  function performPdIncidentSearch() {
   const user = [];
 	user[0] = doc.getElementById('pd-search-incident-number').value;
-	user[1] = doc.getElementById('pd-search-incident-type').value;
+	user[1] = doc.getElementById('pd-search-incident-type').value.toLowerCase();
 	// Set up table header
 	const searchResults = doc.getElementById("search-incident-results");
 	searchResults.innerHTML =	"<tr>"
@@ -326,25 +326,16 @@ function performPdSearch() {
 	// Search each row 1 by 1
 	tableData = fakeIncidents;
 	for (let i = 0; i < tableData.length; i++) {
+
+    let key = tableData[i];
 		let addToList = false;
-		let j=0;
 
-    // Needs to be replaced with SQL query
-		for (const [key, value] of Object.entries(tableData[i])) {
-			if (user[j] != "") { 
-				var a = user[j].toLowerCase();
-				var b = value.toLowerCase();
-				if (b.includes(a)) {	
-					addToList = true;
-				} else {
-					addToList = false;
-					break;
-				};
-
-			};
-			j += 1;
-			if (j == 2) { break };
-		};
+    if (user[0] != "") {
+      addToList = key.incidentNumber.includes(user[0]) ? true : false;
+    }
+    if (user[1] != "") {
+      addToList = key.title.toLowerCase().includes(user[1]) ? true : false;
+    }
     
 		// If potential match add to search results
 		if (addToList) {
@@ -356,17 +347,18 @@ function performPdSearch() {
 			cell1.innerHTML = tableData[i]["incidentNumber"];
 			cell2.innerHTML = tableData[i]["title"];
 			cell3.innerHTML = "";
-			cell4.innerHTML = `<button id=' ${tableData[i][0]}' data-id='${tableData[i][0]}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
+			cell4.innerHTML = `<button data-uid='${key.incidentNumber}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
 		};
 
 	};
 
   // Create button function.
-  const btnPdOpenPerson = document.getElementsByClassName("btn-goto-person");
-  for (let i = 0; i < btnPdOpenPerson.length; i++) {
-    btnPdOpenPerson[i].addEventListener("click", function() {
+  const btnPdOpenIncident = document.getElementsByClassName("btn-goto-incident");
+  for (let i = 0; i < btnPdOpenIncident.length; i++) {
+    btnPdOpenIncident[i].addEventListener("click", function() {
+      console.log(btnPdOpenIncident[i])
       // Character unique ID to assign to button.
-      openPerson(tableData[i][4]);
+      openIncident(btnPdOpenIncident[i].dataset.uid);
     });
   };
 };
@@ -516,7 +508,7 @@ const fakePersonToIncident = {
 
 
 const fakeIncidents = [];
-fakeIncidents[544841] = {
+fakeIncidents[0] = {
   'incidentNumber': "544841",
   'title': "Bank Robbery",
   "tenCode": "10-99",
@@ -549,9 +541,9 @@ changeMdtScreen();
 
 addBoloToDash(fakePeople[0]);
 
-addIncidentToDash(fakeIncidents[544841]);
-addIncidentToDash(fakeIncidents[544841]);
-addIncidentToDash(fakeIncidents[544841]);
+addIncidentToDash(fakeIncidents[0]);
+addIncidentToDash(fakeIncidents[0]);
+addIncidentToDash(fakeIncidents[0]);
 
 
 
