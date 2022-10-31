@@ -1,7 +1,6 @@
 console.log("connected")
 
 const doc = document;
-const pdIncidentCont = doc.getElementById('pd-incident-container');
 const btnPdDashboard = doc.getElementById('btnPdDashboard');
 const btnPdSearch = doc.getElementById('btnPdSearch');
 const btnPdIncidents = doc.getElementById('btnPdIncidents');
@@ -24,6 +23,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	btnPdDashboard.addEventListener("click", function() {
 		changeMdtScreen.makeChange('pd-dashboard-container');
 	});
+
 	btnPdSearch.addEventListener("click", function() {
 		changeMdtScreen.makeChange('pd-search-person-container');
 	});
@@ -60,7 +60,6 @@ window.addEventListener('DOMContentLoaded', function() {
     data[0][4] = msg;
     addEventToEventHistory(data);
   });
-
 });
 
 /**
@@ -131,7 +130,6 @@ function funcPopup(r_reason) {
   h2 = popup.getElementsByTagName("h2");
   h2[0].innerHTML = reason;
   if (popup.style.display != "block") {
-
     popup.style.display = "block";
   }
 
@@ -174,14 +172,14 @@ function addIncidentToDash(data) {
   let incTitle = data.title;
   let incLoc = data.location;
   let incInf = 'Seen heading west.'
-  let newDiv = `<div class='mdt-inc'>`
-             + `<button onclick='openIncident("${incNum}")'></button>`
-             + `<p><span class="code10"> ${tenCode} </span><span> ${incTitle}</span></p>`
-             + `<p><strong>Inc:</strong> ${incNum}</p>`
-             + `<p><strong>Time:</strong> ${timeUT} UT / ${timeUT} LT</p>`
-             + `<p><strong>Loc:</strong> ${incLoc}</p>`
-             + `<p><strong>Info:</strong> ${incInf}</p>`
-             + `</div>`
+  let newDiv = `<div class='mdt-inc'>
+                <button onclick='openIncident("${incNum}")'></button>
+                <p><span class="code10"> ${tenCode} </span><span> ${incTitle}</span></p>
+                <p><strong>Inc:</strong> ${incNum}</p>
+                <p><strong>Time:</strong> ${timeUT} UT / ${timeUT} LT</p>
+                <p><strong>Loc:</strong> ${incLoc}</p>
+                <p><strong>Info:</strong> ${incInf}</p>
+                </div>`
   const incidentCol = doc.getElementById("pd-dashboard-incidents");
   incidentCol.innerHTML += newDiv;
 }
@@ -194,12 +192,12 @@ function addBoloToDash(data) {
   let lname = data.lname;
   let boloReason = data.boloReason;
   let warnings = data.warnings;
-  let newDiv = `<div class='mdt-inc'>`
-             + `<button onclick="openPerson('${data.uid}')"></button>`
-             + `<p><strong>${fname} ${lname}</strong></p>`
-             + `<p><strong>Wanted for:</strong> ${boloReason}</p>`
-             + `<p><strong>Warning:</strong> ${warnings}</p>`
-             + `</div>`;
+  let newDiv = `<div class='mdt-inc'>
+                <button onclick="openPerson('${data.uid}')"></button>
+                <p><strong>${fname} ${lname}</strong></p>
+                <p><strong>Wanted for:</strong> ${boloReason}</p>
+                <p><strong>Warning:</strong> ${warnings}</p>
+                </div>`;
   const incidentCol = doc.getElementById("pd-dashboard-bolos");
   incidentCol.innerHTML += newDiv;
 }
@@ -212,14 +210,14 @@ function addMostWantedToDash(data) {
   let incNum = "43247";
   let incLoc = "The Beach";
   let incInf = "Seen heading west."
-  let newDiv = `<div class='mdt-inc'>`
-             + `<button>R</button>`
-             + `<button>P</button>`
-             + `<p><span>${incTitle}</span></p>`
-             + `<p>Inc: ${incNum}</p>`
-             + `<p>Loc: ${incLoc}</p>`
-             + `<p>Info: ${incInf}</p>`
-             + `</div>`;
+  let newDiv = `<div class='mdt-inc'>
+                <button>R</button>
+                <button>P</button>
+                <p><span>${incTitle}</span></p>
+                <p>Inc: ${incNum}</p>
+                <p>Loc: ${incLoc}</p>
+                <p>Info: ${incInf}</p>
+                </div>`;
   const incidentCol = doc.getElementById("pd-dashboard-most-wanted");
   incidentCol.innerHTML += newDiv;
 }
@@ -232,14 +230,11 @@ function addEventToEventHistory(data) {
   data = data;
   if (data[0][3]) {
     for (let i=0; i < data.length; i++) { 
-      let person = data[i][0];
-      let callSign = data[i][1];
-      let time = data[i][2];
-      let date = data[i][3];
-      let newDiv = `<div class='event-entry'>`
-                 + `<p><strong>${person}</strong> (${callSign}) @ ${time} on ${date}.</p>`
-                 + `<p>${data[i][4]}</p>`
-                 + `</div>`
+      let [person, callSign, time, date]  = data[i];
+      let newDiv = `<div class='event-entry'>
+                    <p><strong>${person}</strong> (${callSign}) @ ${time} on ${date}.</p>
+                    <p>${data[i][4]}</p>
+                    </div>`
       const incidentCol = doc.getElementById("incident-event-history");
       incidentCol.innerHTML += newDiv;
     }
@@ -259,14 +254,14 @@ function performPdSearch() {
 	user[3] = doc.getElementById('pd-search-address').value.toLowerCase();
 	// Set up table header
 	const searchResults = doc.getElementById("search-results");
-	searchResults.innerHTML =	"<tr>"
-													+ "<th>Name</th>"
-													+ "<th>DOB</th>"
-													+ "<th>Address</th>"
-													+ "<th>Flags</th>"
-                          + "</tr>"; 
+	searchResults.innerHTML =	`<tr>
+													   <th>Name</th>
+													   <th>DOB</th>
+													   <th>Address</th>
+													   <th>Flags</th>
+													   </tr>`; 
 
-	for (let i=0; i < fakePeople.length; i++) {
+	for (let i = 0; i < fakePeople.length; i++) {
 		let key = fakePeople[i]
 		let addToList = false;
     if (user[0] != "") {
@@ -278,18 +273,18 @@ function performPdSearch() {
 		// If potential match add to search results
 		if (addToList) {
       const row = searchResults.insertRow(-1);
-      let cell1 = row.insertCell(0);
-      let cell2 = row.insertCell(1);
-      let cell3 = row.insertCell(2);
-      let cell4 = row.insertCell(3);
-      let cell5 = row.insertCell(4);
-      cell1.innerHTML = `${fakePeople[i].fname} ${fakePeople[i].lname}`;
-      cell2.innerHTML = fakePeople[i].dob;
-      cell3.innerHTML = fakePeople[i].address;
-			cell4.innerHTML = "";
-      cell5.innerHTML = `<button data-uid='${fakePeople[i].uid}' class='btn-goto-person btn-yellow' value>Goto</button>`; 
+      const cell = [];
+      for (let i = 0; i < 5; i++) {
+        cell[i] = row.insertCell(i);
+      }
+      cell[0].innerHTML = `${fakePeople[i].fname} ${fakePeople[i].lname}`;
+      cell[1].innerHTML = fakePeople[i].dob;
+      cell[2].innerHTML = fakePeople[i].address;
+			cell[3].innerHTML = "";
+      cell[4].innerHTML = `<button data-uid='${fakePeople[i].uid}' class='btn-goto-person btn-yellow' value>Goto</button>`; 
 		};
 	};
+
   // Create button function.
   const btnPdOpenPerson = document.getElementsByClassName("btn-goto-person");
   for (let i = 0; i < btnPdOpenPerson.length; i++) {
@@ -308,12 +303,12 @@ function performPdIncidentSearch() {
 	user[1] = doc.getElementById('pd-search-incident-type').value.toLowerCase();
 	// Set up table header
 	const searchResults = doc.getElementById("search-incident-results");
-	searchResults.innerHTML =	"<tr>"
-													+ "<th>Incident number:</th>"
-													+ "<th>Type</th>"
-													+ "<th>Flags</th>"
-													+ "<th>Goto</th>"
-													+ "</tr>"; 
+	searchResults.innerHTML =	`<tr>
+													   <th>Incident number:</th>
+													   <th>Type</th>
+													   <th>Flags</th>
+													   <th>Goto</th>
+													   </tr>`; 
 
 	// Search each row 1 by 1
 	tableData = fakeIncidents;
@@ -329,14 +324,14 @@ function performPdIncidentSearch() {
 		// If potential match add to search results
 		if (addToList) {
 			const row = searchResults.insertRow(-1);
-			let cell1 = row.insertCell(0);
-			let cell2 = row.insertCell(1);
-			let cell3 = row.insertCell(2);
-			let cell4 = row.insertCell(3);
-			cell1.innerHTML = tableData[i]["incidentNumber"];
-			cell2.innerHTML = tableData[i]["title"];
-			cell3.innerHTML = "";
-			cell4.innerHTML = `<button data-uid='${key.incidentNumber}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
+      const cell = [];
+      for (let i = 0; i < 4; i++) {
+        cell[i] = row.insertCell(i);
+      }
+			cell[0].innerHTML = tableData[i]["incidentNumber"];
+			cell[1].innerHTML = tableData[i]["title"];
+			cell[2].innerHTML = "";
+			cell[3].innerHTML = `<button data-uid='${key.incidentNumber}' class='btn-goto-incident btn-yellow' value>Goto</button>`;
 		};
 	};
   // Create button function.
@@ -382,13 +377,13 @@ function openPerson(r_uid) {
   }
   // Incident table
 	const personIncidents = doc.getElementById("person-incidents-tbl");
-	personIncidents.innerHTML =	"<tr>"
-														+ "<th>Incident</th>"
-														+ "<th>title</th>"
-														+ "<th>Involvement</th>"
-														+ "<th>Flags</th>"
-                            + "<th>Go to</th>"
-														+ "</tr>"; 
+	personIncidents.innerHTML =	`<tr>
+														   <th>Incident</th>
+														   <th>title</th>
+														   <th>Involvement</th>
+														   <th>Flags</th>
+                               <th>Go to</th>
+														   </tr>`; 
   if(fakePersonToIncident[r_uid]) {
     for (let i=0; i < fakePersonToIncident[r_uid].length; i++) {
       const row = personIncidents.insertRow(-1);
@@ -415,13 +410,13 @@ function openPerson(r_uid) {
   };
   // Vehicles table
 	const personVehicles = doc.getElementById("person-vehicles-tbl");
-	personVehicles.innerHTML =	"<tr>"
-													 + "<th>Red</th>"
-											 	   + "<th>Make</th>"
-										 			 + "<th>Model</th>"
-													 + "<th>Flags</th>"
-													 + "<th>Go to</th>"
-													 + "</tr>"; 
+	personVehicles.innerHTML =	`<tr>
+													     <th>Red</th>
+											 	       <th>Make</th>
+										 			     <th>Model</th>
+													     <th>Flags</th>
+													     <th>Go to</th>
+													     </tr>`; 
 
   for (let i = 0;  i < fakeCars.length; i++) {
     if(r_uid == fakeCars[i][0]) {
